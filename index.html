@@ -1,0 +1,2283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pelatihan MPI Berbasis AI - Guru Madrasah (Kemenag RI)</title>
+  
+  <!-- Google Fonts: Poppins untuk Headings & Inter untuk Body Text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&family=Amiri:wght@700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #0F5132;         /* Hijau Zamrud Kemenag */
+      --primary-dark: #093320;    /* Hijau Tua Deep */
+      --primary-light: #187a4d;   /* Hijau Emerald Segar */
+      --accent: #D4AF37;          /* Emas Elegan */
+      --accent-light: #f6ecd0;    /* Emas Lembut */
+      --cyan-accent: #0284c7;     /* Modern Cyan Aksen */
+      --bg-canvas: #092117;       /* Latar Belakang Luar */
+      --bg-slide: #ffffff;        /* Latar Putih Bersih Slide */
+      --bg-subtle: #f8fafc;       /* Latar Kontainer Abu/Offwhite */
+      --text-main: #1e293b;       /* Teks Utama Slate-900 */
+      --text-muted: #64748b;      /* Teks Sekunder */
+      --border: #e2e8f0;          /* Border Garis */
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
+      --shadow-md: 0 8px 16px -2px rgba(15,81,50,0.08);
+      --shadow-lg: 0 20px 25px -5px rgba(15,81,50,0.12), 0 8px 10px -6px rgba(0,0,0,0.04);
+      --font-heading: 'Poppins', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-canvas);
+      background-image: radial-gradient(circle at 50% 0%, #174d34 0%, #081d14 100%);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* Container 16:9 Display */
+    .deck-container {
+      width: 100vw;
+      max-width: 1366px;
+      height: 100vh;
+      max-height: 768px;
+      background: var(--bg-slide);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      border-radius: var(--radius-md);
+    }
+
+    /* Progress Bar */
+    .top-progress-wrap {
+      width: 100%;
+      height: 5px;
+      background: rgba(212, 175, 55, 0.15);
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 100;
+    }
+    .top-progress-bar {
+      height: 100%;
+      width: 3.125%;
+      background: linear-gradient(90deg, var(--primary), var(--accent), #fef08a);
+      transition: width 0.35s ease;
+    }
+
+    /* Top Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 36px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      z-index: 50;
+      height: 60px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .badge-kemenag {
+      background: var(--primary);
+      color: var(--accent);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+    }
+    .topic-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      letter-spacing: -0.2px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-icon-top {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-icon-top:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    .slide-badge-num {
+      background: var(--primary-light);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    /* Slides Viewport */
+    .viewport {
+      flex: 1;
+      position: relative;
+      width: 100%;
+      height: calc(100% - 116px);
+      overflow: hidden;
+      background: radial-gradient(circle at 90% 10%, rgba(212,175,55,0.06) 0%, transparent 40%),
+                  radial-gradient(circle at 10% 90%, rgba(15,81,50,0.04) 0%, transparent 40%),
+                  var(--bg-slide);
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 24px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(45px);
+      transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
+      overflow-y: auto;
+    }
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+    .slide.exit-left {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-45px);
+    }
+
+    /* Typography & Section Tags */
+    .slide-header {
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+    .category-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary);
+      background: rgba(15, 81, 50, 0.08);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+      border-left: 3px solid var(--accent);
+    }
+    .slide-h1 {
+      font-family: var(--font-heading);
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.2;
+    }
+    .slide-lead {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* Grid Layout Helpers */
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+
+    /* Card System */
+    .card {
+      background: var(--bg-slide);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      border-color: rgba(212, 175, 55, 0.6);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .card.primary-card {
+      border-top: 4px solid var(--primary);
+      background: linear-gradient(180deg, #ffffff 0%, #f7fcf9 100%);
+    }
+    .card.accent-card {
+      border-top: 4px solid var(--accent);
+      background: linear-gradient(180deg, #ffffff 0%, #fdfbf5 100%);
+    }
+    .card.cyan-card {
+      border-top: 4px solid var(--cyan-accent);
+      background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+    }
+
+    .card-num {
+      font-size: 1.5rem;
+      font-weight: 800;
+      font-family: var(--font-heading);
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .card-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .card-list {
+      list-style: none;
+      font-size: 0.82rem;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .card-list li {
+      position: relative;
+      padding-left: 18px;
+      line-height: 1.4;
+    }
+    .card-list li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      color: var(--accent);
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    /* Cover Slide Styling */
+    .cover-layout {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 30px;
+      align-items: center;
+      height: 100%;
+    }
+    .cover-tagline {
+      display: inline-block;
+      background: rgba(212,175,55,0.15);
+      border: 1px solid rgba(212,175,55,0.4);
+      color: #8b6b15;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 30px;
+      margin-bottom: 12px;
+    }
+    .cover-heading {
+      font-family: var(--font-heading);
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .cover-heading span {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 60%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .cover-sub {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 22px;
+      line-height: 1.4;
+    }
+    .cover-presenter-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: #ffffff;
+      padding: 12px 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--accent);
+      box-shadow: var(--shadow-md);
+      width: fit-content;
+    }
+    .presenter-img {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+      box-shadow: var(--shadow-sm);
+    }
+    .presenter-name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--primary-dark);
+    }
+    .presenter-title {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .cover-hero-box {
+      background: linear-gradient(135deg, #093320 0%, #0f5132 100%);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(212,175,55,0.3);
+      box-shadow: var(--shadow-lg);
+    }
+    .cover-bismillah {
+      font-family: 'Amiri', serif;
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .cover-badges-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .badge-pill {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* Interactive Ice Breaking & Poll */
+    .ice-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 6px;
+    }
+    .ice-card {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .ice-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+    .ice-card.selected {
+      border-color: var(--primary);
+      background: #f0fdf4;
+      box-shadow: 0 0 0 3px rgba(15, 81, 50, 0.2);
+    }
+    .ice-icon { font-size: 1.8rem; margin-bottom: 6px; }
+    .ice-name { font-weight: 700; font-size: 0.88rem; color: var(--primary-dark); }
+    .ice-votes { font-size: 0.75rem; color: var(--accent); font-weight: 700; margin-top: 4px; }
+
+    /* Timeline & Roadmap Flow */
+    .timeline-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 20px 0;
+      position: relative;
+    }
+    .timeline-node {
+      flex: 1;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 10px;
+      text-align: center;
+      position: relative;
+      transition: all 0.2s;
+    }
+    .timeline-node:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .timeline-step {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+    .timeline-title {
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin: 4px 0;
+    }
+    .timeline-arrow {
+      color: var(--accent);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    /* Copyable Prompt Box */
+    .prompt-box {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: var(--radius-md);
+      padding: 16px;
+      color: #e2e8f0;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      position: relative;
+      max-height: 220px;
+      overflow-y: auto;
+      margin-top: 8px;
+    }
+    .btn-copy {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--primary);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+    .btn-copy:hover {
+      background: var(--primary-light);
+      color: #ffffff;
+    }
+
+    /* Comparison Table / Box */
+    .comp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .comp-card {
+      border-radius: var(--radius-md);
+      padding: 18px;
+      border: 1px solid var(--border);
+    }
+    .comp-card.bad {
+      background: #fff8f8;
+      border-color: #fecaca;
+    }
+    .comp-card.good {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    /* Form Practice Canvas */
+    .canvas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      height: calc(100% - 70px);
+    }
+    .form-group-wrap {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+    }
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .form-field label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      text-transform: uppercase;
+    }
+    .form-field input, .form-field select, .form-field textarea {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.8rem;
+    }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(15,81,50,0.1);
+    }
+    .btn-gen {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      border: 1px solid var(--accent);
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    /* Checklist Grid */
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .check-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .check-item.checked {
+      background: #f0fdf4;
+      border-color: var(--primary);
+      color: var(--primary-dark);
+    }
+    .check-box-square {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: white;
+    }
+    .check-item.checked .check-box-square {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* Bottom Control Bar */
+    .bottom-bar {
+      height: 56px;
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 36px;
+      z-index: 50;
+    }
+    .shortcut-hints {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .key-badge {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      font-size: 0.7rem;
+    }
+    .btn-nav-group {
+      display: flex;
+      gap: 10px;
+    }
+    .btn-nav {
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--primary-dark);
+      padding: 7px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-nav:hover {
+      background: var(--primary);
+      color: var(--accent);
+      border-color: var(--primary);
+    }
+    .btn-nav:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      border-color: var(--border);
+      background: white;
+      color: var(--text-muted);
+    }
+
+    /* Overview Modal / Drawer */
+    .modal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(9, 33, 23, 0.85);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
+    .modal-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 900px;
+      max-height: 85%;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-grid-toc {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+    .toc-item-btn {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      font-size: 0.75rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font-body);
+    }
+    .toc-item-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    .toc-item-btn.active-toc {
+      border-color: var(--accent);
+      border-left: 4px solid var(--accent);
+      background: #f0fdf4;
+      font-weight: 700;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: absolute;
+      bottom: 70px;
+      right: 36px;
+      background: #0f172a;
+      color: #38bdf8;
+      border: 1px solid #38bdf8;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      display: none;
+      z-index: 300;
+      animation: fadeIn 0.2s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+  <div class="deck-container" id="deckContainer">
+    
+    <!-- Top Animated Progress Bar -->
+    <div class="top-progress-wrap">
+      <div class="top-progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Top Navigation Header -->
+    <header class="navbar">
+      <div class="brand-group">
+        <span class="badge-kemenag">TIM PENGEMBANG LITERASI PROVINSI GORONTALO</span>
+        <span class="topic-title">Pelatihan Pembuatan MPI Berbasis AI • Madrasah Hebat Bermartabat</span>
+      </div>
+      <div class="nav-actions">
+        <button class="btn-icon-top" onclick="toggleOverviewModal()" title="Lihat Daftar Slide">
+          📋 Daftar Slide
+        </button>
+        <button class="btn-icon-top" onclick="toggleFullscreen()" title="Layar Penuh">
+          ⛶ Layar Penuh
+        </button>
+        <span class="slide-badge-num" id="slideIndicator">Slide 1 / 32</span>
+      </div>
+    </header>
+
+    <!-- Slide Viewport (All 32 Slides) -->
+    <main class="viewport">
+
+      <!-- ==================== COVER & ICE BREAKING ==================== -->
+      <!-- SLIDE 1: COVER -->
+      <section class="slide active" data-slide="1">
+        <div class="cover-layout">
+          <div>
+            <span class="cover-tagline">🚀 Pelatihan Guru Madrasah Digital 4.0</span>
+            <h1 class="cover-heading">Pembuatan Media Pembelajaran Interaktif (MPI) <span>Berbasis AI</span></h1>
+            <p class="cover-sub">Dari Ide, Prompt, Generate, Iterasi hingga Publikasi untuk Guru MI, MTs, dan MA</p>
+            
+            <div class="cover-presenter-card">
+              <img src="https://iili.io/CSAHRQ1.png" alt="Rahmat Djafar, S.Pd., Gr" class="presenter-img" onerror="this.src='https://placehold.co/100x100/0F5132/D4AF37?text=RD'">
+              <div>
+                <div class="presenter-name">Rahmat Djafar, S.Pd., Gr.</div>
+                <div class="presenter-title">Instruktur & Fasilitator Media Pembelajaran Digital Madrasah</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cover-hero-box">
+            <div class="cover-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 8px; color: var(--accent);">Transformasi Digital Madrasah</h3>
+            <p style="font-size: 0.8rem; line-height: 1.5; opacity: 0.9;">"Guru tidak harus menjadi programmer untuk menciptakan media pembelajaran interaktif berkualitas tinggi."</p>
+            <div class="cover-badges-row">
+              <span class="badge-pill">🎒 MI</span>
+              <span class="badge-pill">🏫 MTs</span>
+              <span class="badge-pill">🎓 MA</span>
+              <span class="badge-pill">⚡ AI Assisted</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: ICE BREAKING & POLLING -->
+      <section class="slide" data-slide="2">
+        <div class="slide-header">
+          <span class="category-tag">Aktivitas Pembuka</span>
+          <h2 class="slide-h1">Jika AI Bisa Membantu Membuat Media dalam Menit, Apa Pilihan Anda?</h2>
+          <p class="slide-lead">Klik kartu di bawah untuk memberikan aspirasi jenis media pembelajaran yang paling ingin Bapak/Ibu kembangkan hari ini:</p>
+        </div>
+
+        <div class="ice-grid" id="iceGrid">
+          <div class="ice-card" onclick="castVote(0, this)">
+            <div class="ice-icon">🎮</div>
+            <div class="ice-name">Gim Edukasi</div>
+            <div class="ice-votes" id="vote-0">28 Peminat</div>
+          </div>
+          <div class="ice-card" onclick="castVote(1, this)">
+            <div class="ice-icon">🧪</div>
+            <div class="ice-name">Lab Maya / Simulasi</div>
+            <div class="ice-votes" id="vote-1">34 Peminat</div>
+          </div>
+          <div class="ice-card" onclick="castVote(2, this)">
+            <div class="ice-icon">📝</div>
+            <div class="ice-name">Kuis Interaktif Cerdas</div>
+            <div class="ice-votes" id="vote-2">42 Peminat</div>
+          </div>
+          <div class="ice-card" onclick="castVote(3, this)">
+            <div class="ice-icon">🤖</div>
+            <div class="ice-name">Chatbot Pembelajaran</div>
+            <div class="ice-votes" id="vote-3">19 Peminat</div>
+          </div>
+          <div class="ice-card" onclick="castVote(4, this)">
+            <div class="ice-icon">📊</div>
+            <div class="ice-name">LKPD Digital Interaktif</div>
+            <div class="ice-votes" id="vote-4">25 Peminat</div>
+          </div>
+          <div class="ice-card" onclick="castVote(5, this)">
+            <div class="ice-icon">💡</div>
+            <div class="ice-name">MPI Eksplorasi Konsep</div>
+            <div class="ice-votes" id="vote-5">38 Peminat</div>
+          </div>
+          <div class="ice-card" onclick="castVote(6, this)">
+            <div class="ice-icon">🧩</div>
+            <div class="ice-name">Puzzle Mufradat / Istilah</div>
+            <div class="ice-votes" id="vote-6">21 Peminat</div>
+          </div>
+          <div class="ice-card" onclick="castVote(7, this)">
+            <div class="ice-icon">✨</div>
+            <div class="ice-name">Flashcard Cerdas</div>
+            <div class="ice-votes" id="vote-7">16 Peminat</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: PETA ROADMAP -->
+      <section class="slide" data-slide="3">
+        <div class="slide-header">
+          <span class="category-tag">Peta Perjalanan</span>
+          <h2 class="slide-h1">Roadmap Pelatihan: Dari Gagasan ke Hasil Nyata</h2>
+          <p class="slide-lead">Tujuh tahapan sistematis untuk menghasilkan media pembelajaran mandiri berkualitas.</p>
+        </div>
+
+        <div class="timeline-wrap">
+          <div class="timeline-node">
+            <span class="timeline-step">Langkah 1</span>
+            <h4 class="timeline-title">💡 IDE</h4>
+            <p class="card-desc">Tujuan & Analisis Masalah</p>
+          </div>
+          <span class="timeline-arrow">➔</span>
+          <div class="timeline-node">
+            <span class="timeline-step">Langkah 2</span>
+            <h4 class="timeline-title">🎨 DESAIN</h4>
+            <p class="card-desc">Alur & Interaktivitas</p>
+          </div>
+          <span class="timeline-arrow">➔</span>
+          <div class="timeline-node">
+            <span class="timeline-step">Langkah 3</span>
+            <h4 class="timeline-title">📝 PROMPT</h4>
+            <p class="card-desc">Struktur Perintah AI</p>
+          </div>
+          <span class="timeline-arrow">➔</span>
+          <div class="timeline-node">
+            <span class="timeline-step">Langkah 4</span>
+            <h4 class="timeline-title">⚡ GENERATE</h4>
+            <p class="card-desc">Pembuatan Kode HTML</p>
+          </div>
+          <span class="timeline-arrow">➔</span>
+          <div class="timeline-node">
+            <span class="timeline-step">Langkah 5</span>
+            <h4 class="timeline-title">🔄 ITERASI</h4>
+            <p class="card-desc">Revisi & Penyempurnaan</p>
+          </div>
+          <span class="timeline-arrow">➔</span>
+          <div class="timeline-node">
+            <span class="timeline-step">Langkah 6</span>
+            <h4 class="timeline-title">🔍 UJI</h4>
+            <p class="card-desc">Validasi 4 Lapis</p>
+          </div>
+          <span class="timeline-arrow">➔</span>
+          <div class="timeline-node">
+            <span class="timeline-step">Langkah 7</span>
+            <h4 class="timeline-title">🚀 PUBLIKASI</h4>
+            <p class="card-desc">Offline / Online / Hybrid</p>
+          </div>
+        </div>
+
+        <div class="card accent-card" style="padding: 12px 18px;">
+          <p style="font-size: 0.84rem; color: var(--primary-dark); font-weight: 600;">
+            🌟 <b>Prinsip Utama:</b> Guru bertindak sebagai <i>Master Architect</i> (perancang pedagogis), sedangkan AI bertindak sebagai <i>Technical Builder</i> (pembuat kode).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: TUJUAN PELATIHAN -->
+      <section class="slide" data-slide="4">
+        <div class="slide-header">
+          <span class="category-tag">Kompetensi Peserta</span>
+          <h2 class="slide-h1">10 Capaian Hasil Belajar Guru Madrasah</h2>
+          <p class="slide-lead">Setelah mengikuti sesi ini, Bapak/Ibu guru diproyeksikan menguasai:</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card primary-card">
+            <ul class="card-list">
+              <li><b>1. Memahami Konsep MPI Berbasis AI:</b> Menguasai paradigma media aktif modern.</li>
+              <li><b>2. Membedakan Bentuk Media:</b> Memilih antara simulasi, kuis, gim, atau chatbot.</li>
+              <li><b>3. Diferensiasi Jenjang:</b> Menyesuaikan media untuk murid MI, MTs, atau MA.</li>
+              <li><b>4. Kolaborasi Bersama AI:</b> Memanfaatkan AI generatif sebagai rekan co-creator.</li>
+              <li><b>5. Merancang Prompt Terstruktur:</b> Menguasai formula prompt instruksional teruji.</li>
+            </ul>
+          </div>
+          <div class="card accent-card">
+            <ul class="card-list">
+              <li><b>6. Membangun Prototipe Web:</b> Menghasilkan single file HTML5 mandiri.</li>
+              <li><b>7. Siklus Generate-Iterate:</b> Melakukan perbaikan bertahap secara adaptif.</li>
+              <li><b>8. Menentukan Moda Distribusi:</b> Memilih offline, online, atau hybrid sesuai madrasah.</li>
+              <li><b>9. Uji Validasi 4 Lapis:</b> Memastikan kualitas materi, pedagogi, teknis, dan user.</li>
+              <li><b>10. Mempublikasikan MPI:</b> Membagikan media secara gratis dan mudah diakses murid.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== BAGIAN 1: MENGAPA MPI? ==================== -->
+      <!-- SLIDE 5: TANTANGAN PEMBELAJARAN MADRASAH -->
+      <section class="slide" data-slide="5">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 1: Mengapa MPI?</span>
+          <h2 class="slide-h1">Tantangan Riil Pembelajaran di Madrasah Hari Ini</h2>
+          <p class="slide-lead">Berbagai kendala yang dihadapi guru di kelas dan bagaimana teknologi menjembataninya:</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-num">01</div>
+            <div class="card-title">Perhatian Terpecah</div>
+            <p class="card-desc">Murid generasi digital cepat kehilangan konsentrasi bila metode ceramah berlangsung terlalu lama tanpa interaksi.</p>
+          </div>
+          <div class="card">
+            <div class="card-num">02</div>
+            <div class="card-title">Konsep Abstrak</div>
+            <p class="card-desc">Materi seperti tata surya, hukum waris fikih, ikatan kimia, dan kaidah nahwu sulit dipahami tanpa visualisasi langsung.</p>
+          </div>
+          <div class="card">
+            <div class="card-num">03</div>
+            <div class="card-title">Fasilitas Beragam</div>
+            <p class="card-desc">Kondisi lab komputer dan jaringan internet tiap madrasah berbeda, membutuhkan media yang fleksibel (offline/online).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: DARI STATIS KE INTERAKTIF -->
+      <section class="slide" data-slide="6">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 1: Mengapa MPI?</span>
+          <h2 class="slide-h1">Pergeseran Paradigma: Media Statis vs Media Interaktif</h2>
+          <p class="slide-lead">Mengubah peran murid dari sekadar penonton pasif menjadi pelaku aktif belajar.</p>
+        </div>
+
+        <div class="comp-grid">
+          <div class="comp-card bad">
+            <h3 style="color: #991b1b; font-family: var(--font-heading); margin-bottom: 8px;">📕 Media Statis (Pasif)</h3>
+            <p style="font-size: 0.82rem; color: #7f1d1d; margin-bottom: 8px;">Aktivitas peserta didik sangat terbatas pada penerimaan informasi:</p>
+            <ul class="card-list" style="color: #991b1b;">
+              <li>Melihat tayangan slide teks panjang</li>
+              <li>Mendengarkan rekaman ceramah tanpa interaksi</li>
+              <li>Membaca buku teks berlembar-lembar</li>
+              <li>Tingkat retensi pemahaman murid rendah (~10-20%)</li>
+            </ul>
+          </div>
+
+          <div class="comp-card good">
+            <h3 style="color: var(--primary); font-family: var(--font-heading); margin-bottom: 8px;">✨ Media Interaktif (Aktif)</h3>
+            <p style="font-size: 0.82rem; color: var(--primary-dark); margin-bottom: 8px;">Peserta didik mengalami siklus belajar langsung:</p>
+            <ul class="card-list" style="color: var(--primary-dark);">
+              <li>Memilih opsi, menggeser slider, drag-and-drop objek</li>
+              <li>Mencoba simulasi mandiri dan bereksperimen</li>
+              <li>Mendapatkan respons dan umpan balik langsung seketika</li>
+              <li>Tingkat keterlibatan dan pemahaman konsep jauh lebih tinggi</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: MENGAPA INTERAKTIVITAS PENTING -->
+      <section class="slide" data-slide="7">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 1: Mengapa MPI?</span>
+          <h2 class="slide-h1">Prinsip Interaktivitas: Bukan Sekadar Animasi</h2>
+          <p class="slide-lead">Interaktivitas bermakna terjadi ketika tindakan murid memicu proses kognitif.</p>
+        </div>
+
+        <div style="background: white; border: 2px dashed var(--accent); border-radius: var(--radius-md); padding: 18px; text-align: center; margin-bottom: 16px;">
+          <h3 style="font-family: var(--font-heading); color: var(--primary); font-size: 1.25rem;">
+            AKSI MURID ➔ RESPONS SISTEM ➔ UMPAN BALIK ➔ REKONSTRUKSI MAKNA
+          </h3>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-title">1. Aksi Murid</div>
+            <p class="card-desc">Murid menginput variabel, menjawab soal kuis, atau menghubungkan potongan mufradat.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">2. Respons Sistem</div>
+            <p class="card-desc">Aplikasi memproses logika matematis atau kaidah hukum secara seketika di layar.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">3. Refleksi & Belajar</div>
+            <p class="card-desc">Murid melihat akibat dari pilihannya sehingga memahami letak kesalahan atau kebenaran konsep.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== BAGIAN 2: MENGENAL MPI ==================== -->
+      <!-- SLIDE 8: APA ITU MPI -->
+      <section class="slide" data-slide="8">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 2: Mengenal MPI</span>
+          <h2 class="slide-h1">Definisi Media Pembelajaran Interaktif (MPI)</h2>
+          <p class="slide-lead">Memahami batasan dan hakikat MPI dalam konteks pembelajaran modern.</p>
+        </div>
+
+        <div class="card primary-card" style="padding: 22px; margin-bottom: 14px;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.15rem; color: var(--primary-dark); line-height: 1.4;">
+            "MPI adalah media digital terstruktur yang mengintegrasikan teks, visual, audio, dan logika pemrosesan yang memungkinkan peserta didik berinteraksi secara aktif serta memperoleh umpan balik (feedback) seketika untuk mencapai tujuan pembelajaran tertentu."
+          </h3>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-title">🎯 Tujuan Jelas</div>
+            <p class="card-desc">Fokus pada capaian kompetensi dasar/CP, bukan sekadar hiasan.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">⚡ Interaksi Timbal Balik</div>
+            <p class="card-desc">Aplikasi merespons input peserta didik secara dinamis.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">💡 Berdiferensiasi</div>
+            <p class="card-desc">Murid dapat belajar sesuai dengan kecepatan (*self-paced*) masing-masing.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: CIRI MPI YANG BAIK -->
+      <section class="slide" data-slide="9">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 2: Mengenal MPI</span>
+          <h2 class="slide-h1">7 Kriteria Media Pembelajaran Interaktif Berkualitas</h2>
+          <p class="slide-lead">Standar acuan guru madrasah dalam menilai efektivitas media digital:</p>
+        </div>
+
+        <div class="grid-4">
+          <div class="card">
+            <div class="card-title">1. Tujuan Jelas</div>
+            <p class="card-desc">Materi terfokus pada indikator pembelajaran esensial.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">2. Interaksi Relevan</div>
+            <p class="card-desc">Setiap klik atau geseran melatih penalaran murid.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">3. Feedback Cepat</div>
+            <p class="card-desc">Penjelasan langsung muncul saat murid menjawab.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">4. Navigasi Mudah</div>
+            <p class="card-desc">Tata letak intuitif dan tidak membingungkan murid.</p>
+          </div>
+        </div>
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="card">
+            <div class="card-title">5. Visual Edukatif</div>
+            <p class="card-desc">Gambar dan diagram mendukung pemahaman konsep abstrak.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">6. Sesuai Usia</div>
+            <p class="card-desc">Bahasa & grafis pas untuk tingkatan MI, MTs, atau MA.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">7. Ringan & Adaptif</div>
+            <p class="card-desc">Dapat dibuka cepat di HP, tablet, maupun komputer madrasah.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: BUKAN SEMUA YANG BISA DIKLIK ADALAH MPI BAIK -->
+      <section class="slide" data-slide="10">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 2: Mengenal MPI</span>
+          <h2 class="slide-h1">Koreksi Konsep: Jangan Terjebak "Interaksi Semu"</h2>
+          <p class="slide-lead">Membedakan interaksi bermakna dengan interaksi yang hanya bersifat dekoratif:</p>
+        </div>
+
+        <div class="comp-grid">
+          <div class="comp-card bad">
+            <h4 style="color: #991b1b; font-family: var(--font-heading); margin-bottom: 6px;">❌ Interaksi Semu / Dangkal</h4>
+            <ul class="card-list" style="color: #991b1b;">
+              <li>Klik tombol "Lanjut" hanya untuk membalik halaman teks.</li>
+              <li>Animasi meledak/bergerak yang tidak menjelaskan isi materi.</li>
+              <li>Game hanya kejar skor tanpa menuntut pemahaman konsep mapel.</li>
+              <li>Banyak musik bising yang mengganggu konsentrasi belajar.</li>
+            </ul>
+          </div>
+
+          <div class="comp-card good">
+            <h4 style="color: var(--primary); font-family: var(--font-heading); margin-bottom: 6px;">✅ Interaksi Bermakna (Pedagogis)</h4>
+            <ul class="card-list" style="color: var(--primary-dark);">
+              <li>Klik objek untuk menguji hipotesis atau melihat dampak rumus.</li>
+              <li>Animasi yang memvisualisasikan cara kerja organ/mesin/kaidah.</li>
+              <li>Tantangan game dibangun langsung dari permasalahan materi pelajaran.</li>
+              <li>Umpan balik yang memandu murid membetulkan cara berpikirnya.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== BAGIAN 3: BENTUK-BENTUK MPI ==================== -->
+      <!-- SLIDE 11: 5 BENTUK MEDIA INTERAKTIF -->
+      <section class="slide" data-slide="11">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 3: Bentuk-Bentuk MPI</span>
+          <h2 class="slide-h1">5 Varian Media Interaktif yang Dapat Dibuat dengan AI</h2>
+          <p class="slide-lead">Pilih format yang paling relevan dengan karakteristik mata pelajaran:</p>
+        </div>
+
+        <div class="grid-5">
+          <div class="card primary-card">
+            <div class="card-num">01</div>
+            <div class="card-title" style="font-size: 0.95rem;">💡 MPI Modular</div>
+            <p class="card-desc">Media pembelajaran terpadu dengan materi, animasi, dan evaluasi mini.</p>
+          </div>
+          <div class="card accent-card">
+            <div class="card-num">02</div>
+            <div class="card-title" style="font-size: 0.95rem;">🎮 Gim Edukasi</div>
+            <p class="card-desc">Menggunakan mekanik game (poin, level, tantangan) untuk penguatan materi.</p>
+          </div>
+          <div class="card cyan-card">
+            <div class="card-num">03</div>
+            <div class="card-title" style="font-size: 0.95rem;">🧪 Lab Maya</div>
+            <p class="card-desc">Simulasi eksperimen sains dan matematika berbasis manipulasi variabel.</p>
+          </div>
+          <div class="card">
+            <div class="card-num">04</div>
+            <div class="card-title" style="font-size: 0.95rem;">📝 Kuis Cerdas</div>
+            <p class="card-desc">Evaluasi formatif interaktif dengan pembahasan terperinci tiap butir soal.</p>
+          </div>
+          <div class="card">
+            <div class="card-num">05</div>
+            <div class="card-title" style="font-size: 0.95rem;">🤖 Chatbot Tutor</div>
+            <p class="card-desc">Asisten tanya-jawab materi terarah untuk belajar mandiri murid.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: CONTOH UNTUK MI -->
+      <section class="slide" data-slide="12">
+        <div class="slide-header">
+          <span class="category-tag">Diferensiasi Jenjang: Madrasah Ibtidaiyah</span>
+          <h2 class="slide-h1">Inspirasi MPI Jenjang MI (Konkret & Visual)</h2>
+          <p class="slide-lead">Karakteristik murid MI: menyukai warna ceria, objek konkret, interaksi drag-and-drop, dan instruksi sederhana.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card primary-card">
+            <div class="card-title">🧮 Matematika</div>
+            <p class="card-desc"><b>"Petualangan Pecahan Kue":</b> Murid memotong kue secara digital menjadi pecahan 1/2, 1/4, 3/4 untuk visualisasi nilai.</p>
+          </div>
+          <div class="card accent-card">
+            <div class="card-title">🌱 IPAS</div>
+            <p class="card-desc"><b>"Menyusun Bagian Tumbuhan":</b> Menyeret akar, batang, daun, dan bunga ke posisinya dengan suara apresiasi.</p>
+          </div>
+          <div class="card cyan-card">
+            <div class="card-title">🕌 PAI / Fikih</div>
+            <p class="card-desc"><b>"Urutan Gerakan Wudu":</b> Mengurutkan kartu rukun dan sunah wudu secara runtut dengan animasi interaktif.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">📖 Bahasa Arab</div>
+            <p class="card-desc"><b>"Mencocokkan Mufradat Hewan":</b> Menghubungkan tulisan Arab dengan gambar hewan disertai pelafalan audio.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">🇮🇩 Bahasa Indonesia</div>
+            <p class="card-desc"><b>"Susun Kata Menjadi Kalimat":</b> Menyusun balok kata acak menjadi struktur SPOK yang padu.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">✨ Akidah Akhlak</div>
+            <p class="card-desc"><b>"Pohon Asmaul Husna":</b> Menempelkan buah asmaul husna sesuai dengan artinya yang tepat.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: CONTOH UNTUK MTs -->
+      <section class="slide" data-slide="13">
+        <div class="slide-header">
+          <span class="category-tag">Diferensiasi Jenjang: Madrasah Tsanawiyah</span>
+          <h2 class="slide-h1">Inspirasi MPI Jenjang MTs (Eksploratif & Logis)</h2>
+          <p class="slide-lead">Karakteristik murid MTs: mulai berpikir abstrak, menyukai tantangan klasifikasi, pemecahan masalah, dan kuis kompetitif.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card primary-card">
+            <div class="card-title">📐 Matematika</div>
+            <p class="card-desc"><b>"Timbangan Persamaan Linear":</b> Menjaga keseimbangan timbangan neraca digital saat variabel x diubah nilainya.</p>
+          </div>
+          <div class="card accent-card">
+            <div class="card-title">🌌 IPA</div>
+            <p class="card-desc"><b>"Simulasi Orbit Tata Surya":</b> Mengatur jarak planet ke matahari dan melihat perubahan periode revolusi secara langsung.</p>
+          </div>
+          <div class="card cyan-card">
+            <div class="card-title">📖 Al-Qur'an Hadis</div>
+            <p class="card-desc"><b>"Laboratorium Hukum Tajwid":</b> Menyorot potongan ayat untuk mendeteksi hukum Idgham, Ikhfa, atau Iqlab.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">🌍 IPS</div>
+            <p class="card-desc"><b>"Peta Interaktif Jalur Perdagangan":</b> Mengklik rute peta untuk menganalisis kegiatan ekspor-impor di Asia Tenggara.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">🕌 SKI</div>
+            <p class="card-desc"><b>"Garis Waktu Daulah Islamiyah":</b> Menelusuri fase kemajuan peradaban ilmu pengetahuan di masa Bani Abbasiyah.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">💻 Informatika</div>
+            <p class="card-desc"><b>"Simulator Logika Gerbang":</b> Merangkai saklar AND/OR untuk menyalakan lampu digital secara visual.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: CONTOH UNTUK MA -->
+      <section class="slide" data-slide="14">
+        <div class="slide-header">
+          <span class="category-tag">Diferensiasi Jenjang: Madrasah Aliyah</span>
+          <h2 class="slide-h1">Inspirasi MPI Jenjang MA (Analitis & Studi Kasus)</h2>
+          <p class="slide-lead">Karakteristik murid MA: berpikir kritis tingkat tinggi (HOTS), analisis data, simulasi parametrik, dan penalaran kasus kontekstual.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card primary-card">
+            <div class="card-title">⚛️ Fisika & Kimia</div>
+            <p class="card-desc"><b>"Simulator Gerak Parabola & Ikatan":</b> Menguji pengaruh sudut elevasi serta visualisasi pembentukan ikatan kovalen polar.</p>
+          </div>
+          <div class="card accent-card">
+            <div class="card-title">📈 Ekonomi</div>
+            <p class="card-desc"><b>"Kurva Permintaan & Penawaran Dinamis":</b> Menggeser variabel harga dan subsidi untuk melihat titik ekuilibrium pasar.</p>
+          </div>
+          <div class="card cyan-card">
+            <div class="card-title">⚖️ Fikih Mawaris & Muamalah</div>
+            <p class="card-desc"><b>"Kalkulator Waris & Simulasi Akad":</b> Menghitung bagian ashabah dan simulasi akad Mudharabah vs Musyarakah.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">🧬 Biologi</div>
+            <p class="card-desc"><b>"Simulasi Persilangan Dihibrid":</b> Menguji rasio fenotip hukum Mendel II dengan papan catur Punnett interaktif.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">📊 Matematika Peminatan</div>
+            <p class="card-desc"><b>"Lab Maya Transformasi Geometri":</b> Melihat translasi dan rotasi matriks secara dinamis pada bidang kartesius.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">📜 Bahasa Arab / Balaghah</div>
+            <p class="card-desc"><b>"Analisis Majaz & Usul Fiqih":</b> Membedah unsur tasybih dalam syair Arab melalui kartu bedah makna interaktif.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== BAGIAN 4: PERAN AI ==================== -->
+      <!-- SLIDE 15: AI SEBAGAI CO-CREATOR -->
+      <section class="slide" data-slide="15">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 4: Peran AI</span>
+          <h2 class="slide-h1">Sinergi Guru dan AI: Kolaborasi Co-Creator</h2>
+          <p class="slide-lead">AI bukan pengganti guru, melainkan asisten teknis cerdas yang mempercepat produksi media.</p>
+        </div>
+
+        <div class="comp-grid">
+          <div class="card primary-card">
+            <h3 style="color: var(--primary-dark); font-family: var(--font-heading); margin-bottom: 10px;">👨‍🏫 Peran Guru (Pedagogy Master)</h3>
+            <ul class="card-list">
+              <li>Menentukan Capaian Pembelajaran (CP) dan Tujuan Pembelajaran.</li>
+              <li>Memahami karakteristik dan gaya belajar murid madrasah.</li>
+              <li>Menyusun alur skenario materi dan interaktivitas yang diinginkan.</li>
+              <li><b>Melakukan kurasi, validasi, dan memastikan kebenaran konsep mapel.</b></li>
+            </ul>
+          </div>
+
+          <div class="card accent-card">
+            <h3 style="color: #8b6b15; font-family: var(--font-heading); margin-bottom: 10px;">🤖 Peran AI (Technical Builder)</h3>
+            <ul class="card-list">
+              <li>Membantu merumuskan ide aktivitas dan skenario interaksi.</li>
+              <li>Menghasilkan kode pemrograman utuh (HTML5, CSS3, JavaScript).</li>
+              <li>Membuat variasi butir soal, studi kasus, dan logika kuis interaktif.</li>
+              <li>Memperbaiki galat (*debugging*) dan mengubah layout sesuai perintah.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: TOOLS AI GENERATIF -->
+      <section class="slide" data-slide="16">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 4: Peran AI</span>
+          <h2 class="slide-h1">Ekosistem Alat AI Generatif untuk Guru Madrasah</h2>
+          <p class="slide-lead">Beragam platform yang dapat dimanfaatkan secara fleksibel sesuai kebutuhan:</p>
+        </div>
+
+        <div class="grid-4">
+          <div class="card">
+            <div class="card-title">⚡ Google Gemini</div>
+            <p class="card-desc">Sangat baik untuk pembuatan struktur kode HTML interaktif, integrasi ekosistem Google Workspace, dan penalaran cepat.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">💬 OpenAI ChatGPT</div>
+            <p class="card-desc">Kuat dalam merancang narasi studi kasus, instruksi pedagogis, dan logika percabangan kuis interaktif.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">🧠 Claude AI</div>
+            <p class="card-desc">Sangat unggul dalam menghasilkan kode pemrograman web yang rapi, modular, dan penjelasan bahasa yang santun.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">🎨 Canva AI / Studio</div>
+            <p class="card-desc">Membantu pembuatan aset grafis ilustrasi pelengkap, banner pembelajaran, dan ikon visual yang menarik.</p>
+          </div>
+        </div>
+
+        <div class="card accent-card" style="margin-top: 14px; padding: 12px 18px;">
+          <p style="font-size: 0.82rem; color: var(--primary-dark);">
+            💡 <b>Catatan Penting:</b> Tidak ada satu AI yang absolut paling hebat. Fitur, batas kuota (Free Tier), dan kemampuan model terus berkembang seiring waktu.
+          </p>
+        </div>
+      </section>
+
+      <!-- ==================== BAGIAN 5: OFFLINE, ONLINE, HYBRID ==================== -->
+      <!-- SLIDE 17: 3 MODEL MPI -->
+      <section class="slide" data-slide="17">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 5: Arsitektur MPI</span>
+          <h2 class="slide-h1">3 Pendekatan Moda: Offline, Online, atau Hybrid</h2>
+          <p class="slide-lead">Sesuaikan pilihan teknologi dengan kondisi nyata fasilitas dan internet di madrasah:</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card primary-card">
+            <div class="card-num" style="color: var(--primary);">01</div>
+            <div class="card-title">📴 MPI OFFLINE</div>
+            <p class="card-desc"><b>Single File HTML:</b> Semua kode CSS/JS tertanam utuh. Bisa dijalankan langsung di browser laptop/komputer madrasah tanpa kuota internet sedikit pun.</p>
+          </div>
+          <div class="card accent-card">
+            <div class="card-num" style="color: var(--accent);">02</div>
+            <div class="card-title">🌐 MPI ONLINE</div>
+            <p class="card-desc"><b>Cloud & Web Based:</b> Terhubung ke server hosting, database nilai (Google Sheets / Firebase), video streaming YouTube, atau Gemini API.</p>
+          </div>
+          <div class="card cyan-card">
+            <div class="card-num" style="color: var(--cyan-accent);">03</div>
+            <div class="card-title">⚡ MPI HYBRID</div>
+            <p class="card-desc"><b>Fleksibilitas Ganda:</b> Materi dan simulasi inti tetap berjalan mulus saat offline, namun saat ada sinyal internet, skor terkirim ke Google Sheets guru.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 18: KAPAN MEMILIH OFFLINE -->
+      <section class="slide" data-slide="18">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 5: Arsitektur MPI</span>
+          <h2 class="slide-h1">Kapan Guru Tepat Memilih Pendekatan Offline?</h2>
+          <p class="slide-lead">Diagram keputusan untuk efisiensi di madrasah dengan keterbatasan koneksi:</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3 style="font-family: var(--font-heading); color: var(--primary); font-size: 1.05rem; margin-bottom: 8px;">Karakteristik Kondisi:</h3>
+            <ul class="card-list">
+              <li>Jaringan internet di madrasah tidak stabil atau kuota terbatas.</li>
+              <li>Pembelajaran dilakukan di laboratorium komputer lokal madrasah.</li>
+              <li>Media disebarkan langsung via Flashdisk atau Bluetooth ke laptop murid.</li>
+              <li>Aplikasi tidak memerlukan penyimpanan riwayat data murid jangka panjang.</li>
+            </ul>
+          </div>
+          <div class="card accent-card">
+            <h3 style="font-family: var(--font-heading); color: var(--primary-dark); font-size: 1.05rem; margin-bottom: 8px;">Keunggulan & Praktik Terbaik:</h3>
+            <ul class="card-list">
+              <li><b>100% Bebas Kuota:</b> Murid tidak terbebani biaya paket data.</li>
+              <li><b>Loading Instan:</b> Tidak ada kendala buffering atau server down.</li>
+              <li><b>Struktur Ringkas:</b> Cukup satu file `index.html` yang bisa dibuka di browser apapun.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: KAPAN MEMILIH ONLINE -->
+      <section class="slide" data-slide="19">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 5: Arsitektur MPI</span>
+          <h2 class="slide-h1">Kapan Guru Membutuhkan Pendekatan Online?</h2>
+          <p class="slide-lead">Memanfaatkan kekuatan cloud untuk pembelajaran jarak jauh dan otomatisasi rekap nilai:</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3 style="font-family: var(--font-heading); color: var(--cyan-accent); font-size: 1.05rem; margin-bottom: 8px;">Karakteristik Kebutuhan:</h3>
+            <ul class="card-list">
+              <li>Guru ingin rekap nilai kuis murid otomatis masuk ke Google Sheets.</li>
+              <li>Memerlukan fitur live chatbot bertenaga Gemini AI untuk tutor mandiri.</li>
+              <li>Menyematkan video pembelajaran resolusi tinggi dari YouTube / Google Drive.</li>
+              <li>Media diakses murid melalui smartphone masing-masing di rumah via tautan web.</li>
+            </ul>
+          </div>
+          <div class="card primary-card">
+            <h3 style="font-family: var(--font-heading); color: var(--primary-dark); font-size: 1.05rem; margin-bottom: 8px;">Contoh Implementasi:</h3>
+            <ul class="card-list">
+              <li>MPI kuis yang terhubung via Google Apps Script (GAS).</li>
+              <li>Web pembelajaran yang dihosting di GitHub Pages atau Vercel gratis.</li>
+              <li>Chatbot tanya-jawab materi fikih/sains yang memanggil API AI.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: KAPAN MEMILIH HYBRID -->
+      <section class="slide" data-slide="20">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 5: Arsitektur MPI</span>
+          <h2 class="slide-h1">Kapan Memilih Hybrid & Prinsip Golden Rule</h2>
+          <p class="slide-lead">Kombinasi terbaik antara keandalan offline dan kecanggihan online:</p>
+        </div>
+
+        <div class="card" style="margin-bottom: 14px;">
+          <h3 style="font-family: var(--font-heading); color: var(--primary); font-size: 1rem; margin-bottom: 6px;">💡 Solusi Hybrid untuk Madrasah:</h3>
+          <p class="card-desc">
+            Seluruh konten pembelajaran, animasi, dan simulasi bekerja 100% secara offline di perangkat murid. Ketika murid menyelesaikan kuis dan perangkatnya tersambung ke WiFi/internet, skor langsung disinkronkan ke spreadsheet guru.
+          </p>
+        </div>
+
+        <div class="card primary-card" style="background: linear-gradient(135deg, #093320 0%, #0f5132 100%); color: white; padding: 18px;">
+          <h3 style="color: var(--accent); font-family: var(--font-heading); font-size: 1.15rem; margin-bottom: 6px;">
+            ⭐ "Golden Rule" Pemilihan Teknologi:
+          </h3>
+          <p style="font-size: 0.9rem; line-height: 1.5; opacity: 0.95;">
+            <b>"Pilihlah teknologi yang paling sederhana yang mampu mencapai tujuan pembelajaran secara optimal."</b><br>
+            Teknologi mengikuti pedagogi, bukan sebaliknya. Jangan memaksakan teknologi rumit jika solusi sederhana sudah menyelesaikan masalah.
+          </p>
+        </div>
+      </section>
+
+      <!-- ==================== BAGIAN 6: PROMPT ENGINEERING ==================== -->
+      <!-- SLIDE 21: PROMPT UMUM VS PROMPT TERSTRUKTUR -->
+      <section class="slide" data-slide="21">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 6: Prompt Engineering</span>
+          <h2 class="slide-h1">AI Sehebat Prompt yang Kita Berikan</h2>
+          <p class="slide-lead">Kualitas kode MPI yang dihasilkan berbanding lurus dengan kejelasan instruksi guru:</p>
+        </div>
+
+        <div class="comp-grid">
+          <div class="comp-card bad">
+            <h4 style="color: #991b1b; font-family: var(--font-heading); margin-bottom: 6px;">❌ Prompt Umum (Hasil Asal-asalan)</h4>
+            <div style="background: white; padding: 10px; border-radius: 6px; font-family: monospace; font-size: 0.8rem; color: #7f1d1d;">
+              "Buatkan media pembelajaran matematika pecahan yang bagus ya."
+            </div>
+            <p style="font-size: 0.78rem; color: #991b1b; margin-top: 8px;">
+              <b>Kelemahan:</b> AI tidak tahu jenjang kelas, target capaian belajar, jenis interaksi tombol, maupun format file yang diinginkan.
+            </p>
+          </div>
+
+          <div class="comp-card good">
+            <h4 style="color: var(--primary); font-family: var(--font-heading); margin-bottom: 6px;">✅ Prompt Terstruktur (Hasil Presisi)</h4>
+            <div style="background: white; padding: 10px; border-radius: 6px; font-family: monospace; font-size: 0.8rem; color: var(--primary-dark);">
+              "Bertindaklah sebagai Instructional Designer. Buat single file HTML5 mandiri untuk murid kelas 4 MI materi pecahan senilai. Fitur: visualisasi pizza interaktif, tombol tambah irisan, dan umpan balik langsung..."
+            </div>
+            <p style="font-size: 0.78rem; color: var(--primary-dark); margin-top: 8px;">
+              <b>Keunggulan:</b> AI menghasilkan kode yang rapi, terarah, dan siap dijalankan tanpa error.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: ANATOMI PROMPT MPI -->
+      <section class="slide" data-slide="22">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 6: Prompt Engineering</span>
+          <h2 class="slide-h1">Anatomi Formula Prompt MPI Lengkap</h2>
+          <p class="slide-lead">Rumus 9 komponen untuk menghasilkan media pembelajaran digital yang akurat:</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card primary-card">
+            <div class="card-title">1. ROLE</div>
+            <p class="card-desc">"Bertindaklah sebagai Instructional Designer & Frontend Developer..."</p>
+          </div>
+          <div class="card accent-card">
+            <div class="card-title">2. AUDIENCE</div>
+            <p class="card-desc">"Untuk murid kelas 7 MTs / kelas 11 MA dengan bahasa komunikatif..."</p>
+          </div>
+          <div class="card cyan-card">
+            <div class="card-title">3. TOPIK & TUJUAN</div>
+            <p class="card-desc">"Materi Fikih Shalat Jenazah: murid mampu mengurutkan 4 takbir..."</p>
+          </div>
+          <div class="card">
+            <div class="card-title">4. INTERAKSI</div>
+            <p class="card-desc">"Mekanik drag-and-drop kartu lafal bacaan ke kotak urutan..."</p>
+          </div>
+          <div class="card">
+            <div class="card-title">5. FEEDBACK</div>
+            <p class="card-desc">"Berikan kotak dialog apresiasi jika benar dan panduan jika keliru..."</p>
+          </div>
+          <div class="card">
+            <div class="card-title">6. OUTPUT FORMAT</div>
+            <p class="card-desc">"Berikan dalam 1 file HTML utuh berisi HTML5, CSS3, dan JS..."</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: TEMPLATE MASTER PROMPT -->
+      <section class="slide" data-slide="23">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 6: Prompt Engineering</span>
+          <h2 class="slide-h1">Template Master Prompt MPI (Siap Salin)</h2>
+          <p class="slide-lead">Gunakan template serbaguna ini untuk menghasilkan media pembelajaran di AI generatif:</p>
+        </div>
+
+        <div class="prompt-box" id="masterPromptCode">
+<button class="btn-copy" onclick="copyMasterPrompt()">📋 Salin Prompt</button>
+Bertindaklah sebagai Senior Instructional Designer dan Pengembang Media Pembelajaran Interaktif.
+Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) untuk:
+
+1. Jenjang: [MI / MTs / MA]
+2. Mata Pelajaran: [Nama Mapel, misal: IPA / Fikih / Matematika]
+3. Kelas / Topik: [Misal: Kelas VIII / Hukum Newton]
+4. Capaian Pembelajaran: [Siswa mampu ...]
+5. Bentuk Media: [Simulasi / Lab Maya / Kuis Interaktif / Gim Edukasi]
+6. Mekanik Interaktivitas:
+   - Slider / Tombol untuk manipulasi variabel
+   - Respon visual real-time di layar
+   - Umpan balik (feedback) instan penjelasan konsep
+7. Desain Visual:
+   - Modern, bersih, ramah anak/remaja, responsif (HP & Laptop)
+   - Warna bertema edukatif dan tidak melelahkan mata
+8. Output Teknis:
+   - Hasilkan dalam SATU blok kode HTML lengkap yang siap dibuka di browser secara OFFLINE tanpa dependensi eksternal yang rumit.
+        </div>
+      </section>
+
+      <!-- ==================== BAGIAN 7: WORKFLOW PEMBUATAN ==================== -->
+      <!-- SLIDE 24: 7 LANGKAH KERJA -->
+      <section class="slide" data-slide="24">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 7: Alur Kerja</span>
+          <h2 class="slide-h1">7 Langkah Alur Pembuatan MPI Praktis</h2>
+          <p class="slide-lead">Urutan kerja efisien dari tahap persiapan hingga implementasi di kelas:</p>
+        </div>
+
+        <div class="grid-4">
+          <div class="card">
+            <div class="card-num">01</div>
+            <div class="card-title">Tujuan Belajar</div>
+            <p class="card-desc">Rumuskan masalah materi apa yang paling sulit divisualisasikan.</p>
+          </div>
+          <div class="card">
+            <div class="card-num">02</div>
+            <div class="card-title">Pilih Format</div>
+            <p class="card-desc">Tentukan apakah berbentuk lab maya, kuis, atau petualangan konsep.</p>
+          </div>
+          <div class="card">
+            <div class="card-num">03</div>
+            <div class="card-title">Rancang Alur</div>
+            <p class="card-desc">Bayangkan apa yang akan diklik murid dan apa respons aplikasinya.</p>
+          </div>
+          <div class="card">
+            <div class="card-num">04</div>
+            <div class="card-title">Tulis Prompt</div>
+            <p class="card-desc">Gunakan template terstruktur dengan variabel yang jelas.</p>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="card primary-card">
+            <div class="card-num">05</div>
+            <div class="card-title">Generate AI</div>
+            <p class="card-desc">Jalankan di Gemini / ChatGPT / Claude untuk menghasilkan kode.</p>
+          </div>
+          <div class="card accent-card">
+            <div class="card-num">06</div>
+            <div class="card-title">Uji & Iterasi</div>
+            <p class="card-desc">Buka file di browser, temukan kekurangan, dan minta AI merevisi.</p>
+          </div>
+          <div class="card cyan-card">
+            <div class="card-num">07</div>
+            <div class="card-title">Publikasi</div>
+            <p class="card-desc">Bagikan ke murid secara offline (flashdisk) atau online (link web).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: GENERATE BUKAN LANGKAH TERAKHIR -->
+      <section class="slide" data-slide="25">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 7: Alur Kerja</span>
+          <h2 class="slide-h1">Generate AI Bukan Langkah Terakhir!</h2>
+          <p class="slide-lead">Siklus iterasi adalah kunci menghasilkan media pembelajaran yang sempurna.</p>
+        </div>
+
+        <div class="card" style="text-align: center; padding: 18px; margin-bottom: 14px; background: #fdfaf0; border-color: var(--accent);">
+          <h3 style="font-family: var(--font-heading); color: var(--primary); font-size: 1.1rem;">
+            PROMPT ➔ GENERATE ➔ PREVIEW DI BROWSER ➔ TEMUKAN KEKURANGAN ➔ REVISI PROMPT
+          </h3>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">💡 Fakta Lapangan:</div>
+            <p class="card-desc">
+              Hasil kode pertama dari AI jarang sekali langsung 100% sempurna sesuai imajinasi guru. Bisa saja tombol kekecilan di HP, penjelasan soal kurang lengkap, atau warna kurang kontras.
+            </p>
+          </div>
+          <div class="card accent-card">
+            <div class="card-title">🎯 Kunci Keberhasilan:</div>
+            <p class="card-desc">
+              Lakukan minimal <b>2 hingga 3 kali iterasi prompt perbaikan</b>. AI sangat cerdas dalam menuruti instruksi spesifik seperti "Ubah skor agar bertambah 10 jika benar".
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 26: CONTOH PROMPT ITERASI -->
+      <section class="slide" data-slide="26">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 7: Alur Kerja</span>
+          <h2 class="slide-h1">Bank Contoh Perintah Iterasi Perbaikan</h2>
+          <p class="slide-lead">Instruksi langsung untuk menyempurnakan prototipe media:</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">📱 Respon & Tampilan di HP</div>
+            <p class="card-desc" style="font-family: monospace; font-size: 0.8rem; background: var(--bg-subtle); padding: 8px; border-radius: 4px; margin-top: 4px;">
+              "Perbesar ukuran tombol dan teks agar nyaman disentuh murid saat dibuka di layar smartphone."
+            </p>
+            <button class="btn-copy" style="position: static; margin-top: 8px; width: fit-content;" onclick="copyText('Perbesar ukuran tombol dan teks agar nyaman disentuh murid saat dibuka di layar smartphone.')">Salin Teks</button>
+          </div>
+
+          <div class="card">
+            <div class="card-title">💡 Pedagogi & Feedback</div>
+            <p class="card-desc" style="font-family: monospace; font-size: 0.8rem; background: var(--bg-subtle); padding: 8px; border-radius: 4px; margin-top: 4px;">
+              "Tambahkan dialog penjelasan konsep jika murid memilih jawaban yang salah, bukan hanya tanda silang merah."
+            </p>
+            <button class="btn-copy" style="position: static; margin-top: 8px; width: fit-content;" onclick="copyText('Tambahkan dialog penjelasan konsep jika murid memilih jawaban yang salah, bukan hanya tanda silang merah.')">Salin Teks</button>
+          </div>
+
+          <div class="card">
+            <div class="card-title">👶 Penyesuaian Usia MI</div>
+            <p class="card-desc" style="font-family: monospace; font-size: 0.8rem; background: var(--bg-subtle); padding: 8px; border-radius: 4px; margin-top: 4px;">
+              "Sederhanakan kalimat instruksi agar mudah dipahami anak kelas 3 MI dan tambahkan efek kembang api saat selesai."
+            </p>
+            <button class="btn-copy" style="position: static; margin-top: 8px; width: fit-content;" onclick="copyText('Sederhanakan kalimat instruksi agar mudah dipahami anak kelas 3 MI dan tambahkan efek kembang api saat selesai.')">Salin Teks</button>
+          </div>
+
+          <div class="card">
+            <div class="card-title">🧪 Peningkatan Simulasi MA</div>
+            <p class="card-desc" style="font-family: monospace; font-size: 0.8rem; background: var(--bg-subtle); padding: 8px; border-radius: 4px; margin-top: 4px;">
+              "Tambahkan tabel grafik data dinamis di bawah simulasi agar siswa MA dapat mencatat hubungan antar variabel."
+            </p>
+            <button class="btn-copy" style="position: static; margin-top: 8px; width: fit-content;" onclick="copyText('Tambahkan tabel grafik data dinamis di bawah simulasi agar siswa MA dapat mencatat hubungan antar variabel.')">Salin Teks</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== BAGIAN 8: UJI KUALITAS & ETIKA ==================== -->
+      <!-- SLIDE 27: CHECKLIST SEBELUM KELAS -->
+      <section class="slide" data-slide="27">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 8: Uji Kualitas</span>
+          <h2 class="slide-h1">Daftar Periksa Uji Kelayakan Media (Checklist)</h2>
+          <p class="slide-lead">Klik item di bawah untuk memverifikasi kesiapan media sebelum diterapkan di kelas:</p>
+        </div>
+
+        <div class="check-grid" id="checkGrid">
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box-square">✓</div>
+            <span>Materi benar & sahih</span>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box-square">✓</div>
+            <span>Sesuai tujuan belajar</span>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box-square">✓</div>
+            <span>Semua tombol berfungsi</span>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box-square">✓</div>
+            <span>Umpan balik muncul</span>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box-square">✓</div>
+            <span>Tidak ada teks terpotong</span>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box-square">✓</div>
+            <span>Nyaman dibuka di HP</span>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box-square">✓</div>
+            <span>Instruksi mudah dipahami</span>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box-square">✓</div>
+            <span>Kunci jawaban kuis akurat</span>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box-square">✓</div>
+            <span>Bebas konten negatif</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: UJI 4 LAPIS -->
+      <section class="slide" data-slide="28">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 8: Uji Kualitas & Etika</span>
+          <h2 class="slide-h1">Validasi 4 Lapis & Prinsip Etika Penggunaan AI</h2>
+          <p class="slide-lead">Menjaga akurasi dan integritas akademik media pembelajaran madrasah:</p>
+        </div>
+
+        <div class="grid-4">
+          <div class="card primary-card">
+            <div class="card-num">01</div>
+            <div class="card-title">Uji Konten</div>
+            <p class="card-desc">Apakah fakta sains, ayat Al-Qur'an, harakat Arab, dan rumus sudah 100% akurat?</p>
+          </div>
+          <div class="card accent-card">
+            <div class="card-num">02</div>
+            <div class="card-title">Uji Pedagogi</div>
+            <p class="card-desc">Apakah interaktivitas benar-benar membantu murid mengonstruksi pemahaman konsep?</p>
+          </div>
+          <div class="card cyan-card">
+            <div class="card-num">03</div>
+            <div class="card-title">Uji Teknis</div>
+            <p class="card-desc">Apakah media bisa berjalan lancar tanpa internet bila menggunakan mode offline?</p>
+          </div>
+          <div class="card">
+            <div class="card-num">04</div>
+            <div class="card-title">Uji Pengguna</div>
+            <p class="card-desc">Apakah ukuran tombol, warna, dan bahasa sudah pas dengan psikologi usia murid?</p>
+          </div>
+        </div>
+
+        <div class="card accent-card" style="margin-top: 14px; padding: 12px 18px;">
+          <p style="font-size: 0.84rem; color: var(--primary-dark); font-weight: 600;">
+            🛡️ <b>Prinsip Etika AI:</b> "AI Menghasilkan (Generate), Guru Memvalidasi (Validate)". AI bukan sumber kebenaran mutlak; tanggung jawab kebenaran materi tetap berada di tangan guru.
+          </p>
+        </div>
+      </section>
+
+      <!-- ==================== BAGIAN 9: PUBLIKASI ==================== -->
+      <!-- SLIDE 29: CARA MEMBAGIKAN MPI -->
+      <section class="slide" data-slide="29">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 9: Publikasi & Distribusi</span>
+          <h2 class="slide-h1">Bagaimana Cara Membagikan MPI kepada Peserta Didik?</h2>
+          <p class="slide-lead">Dua jalur distribusi praktis tanpa biaya sewa server yang mahal:</p>
+        </div>
+
+        <div class="comp-grid">
+          <div class="card primary-card">
+            <h3 style="color: var(--primary-dark); font-family: var(--font-heading); margin-bottom: 8px;">📴 Jalur Offline (Madrasah)</h3>
+            <ul class="card-list">
+              <li><b>Flashdisk Guru:</b> Salin file `index.html` ke seluruh PC di laboratorium komputer.</li>
+              <li><b>Jaringan Lokal (LAN / WiFi Sekolah):</b> Pasang file di satu komputer server lokal tanpa perlu internet keluar.</li>
+              <li><b>Direct Share:</b> Kirim file via WhatsApp Web / Bluetooth ke laptop murid. Cukup klik ganda untuk membuka.</li>
+            </ul>
+          </div>
+
+          <div class="card accent-card">
+            <h3 style="color: #8b6b15; font-family: var(--font-heading); margin-bottom: 8px;">🌐 Jalur Online (Gratis & Cloud)</h3>
+            <ul class="card-list">
+              <li><b>Google Apps Script (GAS):</b> Tanam kode HTML di proyek Apps Script dan publikasikan sebagai Web App.</li>
+              <li><b>GitHub Pages / Vercel / Netlify:</b> Upload file HTML untuk mendapatkan tautan web permanen resmi.</li>
+              <li><b>Website Madrasah:</b> Sematkan (*embed*) ke dalam portal e-learning madrasah yang sudah ada.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== BAGIAN 10: PRAKTIK & WORKSHOP ==================== -->
+      <!-- SLIDE 30: TANTANGAN PRAKTIK -->
+      <section class="slide" data-slide="30">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 10: Praktik Mandiri</span>
+          <h2 class="slide-h1">Tantangan Praktik: Saatnya Guru Mencipta!</h2>
+          <p class="slide-lead">SOP langkah demi langkah kegiatan workshop pembuatan media hari ini:</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card primary-card">
+            <h4 style="font-family: var(--font-heading); color: var(--primary-dark); margin-bottom: 8px;">📋 Tahapan Kerja Peserta:</h4>
+            <ol style="font-size: 0.82rem; color: var(--text-main); padding-left: 18px; line-height: 1.6;">
+              <li>Pilih 1 materi/topik yang akan diajarkan minggu depan.</li>
+              <li>Tentukan jenjang: <b>MI, MTs, atau MA</b>.</li>
+              <li>Pilih format: <b>Lab Maya / Gim / Kuis / Flashcard / MPI Modular</b>.</li>
+              <li>Tentukan moda: <b>Offline (Single HTML) / Online / Hybrid</b>.</li>
+              <li>Isi Canvas Praktik pada slide berikutnya untuk generate prompt.</li>
+              <li>Jalankan di AI (Gemini / ChatGPT / Claude).</li>
+              <li>Simpan kode sebagai <code>index.html</code> dan buka di browser.</li>
+              <li>Lakukan iterasi perbaikan minimal 2 kali.</li>
+            </ol>
+          </div>
+
+          <div class="card accent-card" style="display: flex; flex-direction: column; justify-content: center; text-align: center; padding: 24px;">
+            <div style="font-size: 3rem; margin-bottom: 8px;">⏱️</div>
+            <h3 style="font-family: var(--font-heading); color: var(--primary-dark); font-size: 1.2rem;">Waktu Praktik: 30 Menit</h3>
+            <p class="card-desc" style="margin-top: 6px;">
+              Fasilitator akan berkeliling mendampingi Bapak/Ibu dalam menguji hasil kode di browser laptop masing-masing.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 31: CANVAS GENERATOR PROMPT PRAKTIK INTERAKTIF -->
+      <section class="slide" data-slide="31">
+        <div class="slide-header">
+          <span class="category-tag">Bagian 10: Praktik Mandiri</span>
+          <h2 class="slide-h1">Interactive Canvas: Generator Prompt MPI Instan</h2>
+          <p class="slide-lead">Isi form rancangan pembelajaran di bawah untuk menyusun prompt otomatis siap pakai:</p>
+        </div>
+
+        <div class="canvas-grid">
+          <!-- Form Input -->
+          <div class="form-group-wrap">
+            <div class="input-row">
+              <div class="form-field">
+                <label>Jenjang</label>
+                <select id="canvasJenjang">
+                  <option value="Madrasah Ibtidaiyah (MI)">MI (Ibtidaiyah)</option>
+                  <option value="Madrasah Tsanawiyah (MTs)" selected>MTs (Tsanawiyah)</option>
+                  <option value="Madrasah Aliyah (MA)">MA (Aliyah)</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label>Mata Pelajaran</label>
+                <input type="text" id="canvasMapel" value="IPA / Fisika" placeholder="Contoh: Fikih, Biologi">
+              </div>
+            </div>
+
+            <div class="input-row">
+              <div class="form-field">
+                <label>Kelas / Fase</label>
+                <input type="text" id="canvasKelas" value="Kelas VII / Fase D" placeholder="Contoh: Kelas IV MI">
+              </div>
+              <div class="form-field">
+                <label>Jenis Media</label>
+                <select id="canvasJenis">
+                  <option value="Simulasi / Lab Maya Interaktif">Simulasi / Lab Maya</option>
+                  <option value="Gim Edukasi Konsep">Gim Edukasi</option>
+                  <option value="Kuis Interaktif Cerdas">Kuis Interaktif</option>
+                  <option value="MPI Eksplorasi Modular">MPI Modular Lengkap</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label>Topik Materi</label>
+              <input type="text" id="canvasMateri" value="Siklus Air dan Presipitasi" placeholder="Misal: Rukun Wudu, Ikatan Kimia">
+            </div>
+
+            <div class="form-field">
+              <label>Tujuan Pembelajaran</label>
+              <input type="text" id="canvasTujuan" value="Murid dapat memanipulasi suhu dan melihat proses evaporasi hingga hujan" placeholder="Capaian target murid">
+            </div>
+
+            <div class="form-field">
+              <label>Moda Media</label>
+              <select id="canvasModa">
+                <option value="Offline (Single File HTML mandiri tanpa internet)">Offline (1 File HTML Mandiri)</option>
+                <option value="Hybrid (Offline dengan sinkronisasi nilai)">Hybrid</option>
+                <option value="Online (Terkoneksi API / Cloud)">Online</option>
+              </select>
+            </div>
+
+            <button class="btn-gen" onclick="generatePracticePrompt()">
+              ⚡ Hasilkan Prompt Praktik
+            </button>
+          </div>
+
+          <!-- Output Prompt Box -->
+          <div style="display: flex; flex-direction: column; background: #0f172a; border-radius: var(--radius-md); padding: 14px; position: relative;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 0.75rem; color: var(--accent); font-weight: 700;">PROMPT SIAP SALIN KE AI:</span>
+              <button class="btn-copy" style="position: static;" onclick="copyGeneratedPracticePrompt()">📋 Salin Prompt</button>
+            </div>
+            <textarea id="practicePromptOutput" style="flex: 1; width: 100%; background: transparent; border: none; color: #e2e8f0; font-family: monospace; font-size: 0.78rem; line-height: 1.4; resize: none; outline: none;" readonly>Klik tombol "Hasilkan Prompt Praktik" di sebelah kiri untuk membuat prompt yang dipersonalisasi...</textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 32: PENUTUP & KATA BIJAK -->
+      <section class="slide" data-slide="32">
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 0 40px;">
+          <span class="cover-tagline">🌟 Refleksi Akhir Pelatihan</span>
+          
+          <h2 style="font-family: var(--font-heading); font-size: 1.85rem; color: var(--primary-dark); margin: 8px 0 14px; max-width: 900px; line-height: 1.3;">
+            "Guru Tidak Harus Menjadi Programmer untuk Menciptakan Pembelajaran Digital yang Bermakna."
+          </h2>
+
+          <div class="card accent-card" style="max-width: 800px; padding: 16px 24px; margin-bottom: 20px;">
+            <p style="font-size: 0.95rem; color: var(--primary-dark); font-weight: 600; line-height: 1.6;">
+              Mulai dari masalah pembelajaran di kelas.<br>
+              Rancang pengalaman belajar yang menyenangkan.<br>
+              Gunakan AI untuk membantu mewujudkannya menjadi media interaktif.
+            </p>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+            <img src="https://iili.io/CSAHRQ1.png" alt="Rahmat Djafar, S.Pd., Gr" class="presenter-img" style="width: 50px; height: 50px;" onerror="this.src='https://placehold.co/100x100/0F5132/D4AF37?text=RD'">
+            <div style="text-align: left;">
+              <div style="font-family: var(--font-heading); font-weight: 700; color: var(--primary-dark); font-size: 0.95rem;">Rahmat Djafar, S.Pd., Gr.</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">GURU SMA ISLAM TERPADU AL ISHLAH GORONTALO • PENGEMBANG MEDIA PEMBELAJARAN RUANG MURID</div>
+            </div>
+          </div>
+
+          <div style="font-size: 0.78rem; color: var(--text-muted);">
+            Roadmap Sukses: <b>IDE ➔ PROMPT ➔ GENERATE ➔ ITERASI ➔ UJI ➔ PUBLIKASI</b>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Controls -->
+    <footer class="bottom-bar">
+      <div class="shortcut-hints">
+        <span>Gunakan Keyboard:</span>
+        <span><kbd class="key-badge">←</kbd> Sebelumnya</span>
+        <span><kbd class="key-badge">→</kbd> / <kbd class="key-badge">Spasi</kbd> Selanjutnya</span>
+        <span><kbd class="key-badge">Home</kbd> / <kbd class="key-badge">End</kbd></span>
+      </div>
+
+      <div class="btn-nav-group">
+        <button class="btn-nav" id="btnPrev" onclick="navigateSlide(-1)" disabled>
+          ◀ Sebelumnya
+        </button>
+        <button class="btn-nav" id="btnNext" onclick="navigateSlide(1)">
+          Selanjutnya ▶
+        </button>
+      </div>
+    </footer>
+
+    <!-- Slide Overview Modal -->
+    <div class="modal-overlay" id="overviewModal" onclick="closeOverviewIfOutside(event)">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 style="font-family: var(--font-heading); color: var(--primary-dark); font-size: 1.1rem;">📑 Indeks 32 Slide Presentasi</h3>
+          <button class="btn-icon-top" onclick="toggleOverviewModal()">Tutup ✕</button>
+        </div>
+        <div class="modal-grid-toc" id="tocGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toastMessage">Teks berhasil disalin ke clipboard!</div>
+
+  </div>
+
+  <script>
+    // State Variables
+    let currentSlide = 1;
+    const totalSlides = 32;
+
+    // Titles List for TOC Index
+    const slideTitles = [
+      "1. Cover & Identitas Pelatihan",
+      "2. Ice Breaking & Poling Peminatan",
+      "3. Roadmap Perjalanan 7 Langkah",
+      "4. 10 Capaian Hasil Belajar",
+      "5. Tantangan Pembelajaran Madrasah",
+      "6. Media Statis vs Interaktif",
+      "7. Hakikat Interaktivitas Pedagogis",
+      "8. Definisi Konsep MPI",
+      "9. 7 Kriteria MPI Berkualitas",
+      "10. Waspada Interaksi Semu",
+      "11. 5 Varian Media Interaktif",
+      "12. Contoh Relevan Jenjang MI",
+      "13. Contoh Relevan Jenjang MTs",
+      "14. Contoh Relevan Jenjang MA",
+      "15. Sinergi Guru & AI Co-Creator",
+      "16. Ekosistem Alat AI Generatif",
+      "17. 3 Model: Offline, Online, Hybrid",
+      "18. Panduan Memilih Offline",
+      "19. Panduan Memilih Online",
+      "20. Solusi Hybrid & Golden Rule",
+      "21. Prompt Umum vs Terstruktur",
+      "22. Anatomi 9 Formula Prompt",
+      "23. Template Master Prompt MPI",
+      "24. 7 Langkah Alur Kerja Pembuatan",
+      "25. Siklus Iterasi Berkelanjutan",
+      "26. Bank Prompt Iterasi Perbaikan",
+      "27. Checklist Uji Pra-Kelas",
+      "28. Validasi 4 Lapis & Etika AI",
+      "29. Jalur Publikasi Offline & Online",
+      "30. SOP & Tantangan Praktik Guru",
+      "31. Interactive Canvas Generator",
+      "32. Penutup & Refleksi Bermakna"
+    ];
+
+    // Initialize View
+    function updateSlideView() {
+      const slides = document.querySelectorAll('.slide');
+      slides.forEach((slide) => {
+        const idx = parseInt(slide.getAttribute('data-slide'));
+        slide.classList.remove('active', 'exit-left');
+
+        if (idx === currentSlide) {
+          slide.classList.add('active');
+        } else if (idx < currentSlide) {
+          slide.classList.add('exit-left');
+        }
+      });
+
+      // Update Indicators
+      document.getElementById('slideIndicator').innerText = `Slide ${currentSlide} / ${totalSlides}`;
+      const progressPercent = (currentSlide / totalSlides) * 100;
+      document.getElementById('progressBar').style.width = `${progressPercent}%`;
+
+      // Button State
+      document.getElementById('btnPrev').disabled = currentSlide === 1;
+      document.getElementById('btnNext').disabled = currentSlide === totalSlides;
+
+      // Update TOC Active
+      updateTocActive();
+    }
+
+    function navigateSlide(direction) {
+      const target = currentSlide + direction;
+      if (target >= 1 && target <= totalSlides) {
+        currentSlide = target;
+        updateSlideView();
+      }
+    }
+
+    function goToSlide(slideNum) {
+      if (slideNum >= 1 && slideNum <= totalSlides) {
+        currentSlide = slideNum;
+        updateSlideView();
+        toggleOverviewModal(false);
+      }
+    }
+
+    // Keyboard Shortcuts
+    window.addEventListener('keydown', (e) => {
+      // Ignore if user is currently typing in an input or textarea
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) {
+        return;
+      }
+
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        navigateSlide(1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        navigateSlide(-1);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        goToSlide(1);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        goToSlide(totalSlides);
+      } else if (e.key.toLowerCase() === 'f') {
+        toggleFullscreen();
+      } else if (e.key.toLowerCase() === 'o') {
+        toggleOverviewModal();
+      }
+    });
+
+    // Overview Table of Contents
+    function buildTocGrid() {
+      const container = document.getElementById('tocGrid');
+      container.innerHTML = '';
+      slideTitles.forEach((title, idx) => {
+        const slideNum = idx + 1;
+        const btn = document.createElement('button');
+        btn.className = `toc-item-btn ${slideNum === currentSlide ? 'active-toc' : ''}`;
+        btn.innerText = title;
+        btn.onclick = () => goToSlide(slideNum);
+        container.appendChild(btn);
+      });
+    }
+
+    function updateTocActive() {
+      const buttons = document.querySelectorAll('.toc-item-btn');
+      buttons.forEach((btn, idx) => {
+        if (idx + 1 === currentSlide) {
+          btn.classList.add('active-toc');
+        } else {
+          btn.classList.remove('active-toc');
+        }
+      });
+    }
+
+    function toggleOverviewModal(forceState) {
+      const modal = document.getElementById('overviewModal');
+      const shouldOpen = forceState !== undefined ? forceState : modal.style.display !== 'flex';
+      modal.style.display = shouldOpen ? 'flex' : 'none';
+      if (shouldOpen) buildTocGrid();
+    }
+
+    function closeOverviewIfOutside(e) {
+      if (e.target.id === 'overviewModal') {
+        toggleOverviewModal(false);
+      }
+    }
+
+    // Fullscreen Toggle
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // Toast Notification & Safe Clipboard Copy
+    function showToast(msg = 'Teks berhasil disalin!') {
+      const toast = document.getElementById('toastMessage');
+      toast.innerText = msg;
+      toast.style.display = 'block';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 2500);
+    }
+
+    function copyText(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast('Teks berhasil disalin!');
+      } catch (err) {
+        showToast('Gagal menyalin otomatis');
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function copyMasterPrompt() {
+      const promptElem = document.getElementById('masterPromptCode');
+      const textToCopy = promptElem.innerText.replace('📋 Salin Prompt', '').trim();
+      copyText(textToCopy);
+    }
+
+    // Interactive Poll on Slide 2
+    let votes = [28, 34, 42, 19, 25, 38, 21, 16];
+    function castVote(index, element) {
+      votes[index]++;
+      document.getElementById(`vote-${index}`).innerText = `${votes[index]} Peminat`;
+      
+      const cards = document.querySelectorAll('.ice-card');
+      cards.forEach(c => c.classList.remove('selected'));
+      element.classList.add('selected');
+      showToast('Pilihan Anda tercatat di sesi pelatihan!');
+    }
+
+    // Checklist on Slide 27
+    function toggleCheck(element) {
+      element.classList.toggle('checked');
+    }
+
+    // Interactive Practice Canvas on Slide 31
+    function generatePracticePrompt() {
+      const jenjang = document.getElementById('canvasJenjang').value;
+      const mapel = document.getElementById('canvasMapel').value.trim() || 'Mata Pelajaran Madrasah';
+      const kelas = document.getElementById('canvasKelas').value.trim() || 'Sesuai Fase';
+      const jenis = document.getElementById('canvasJenis').value;
+      const materi = document.getElementById('canvasMateri').value.trim() || 'Topik Utama';
+      const tujuan = document.getElementById('canvasTujuan').value.trim() || 'Memahami konsep dasar secara interaktif';
+      const moda = document.getElementById('canvasModa').value;
+
+      const generated = `Bertindaklah sebagai Senior Instructional Designer dan Pengembang Media Pembelajaran Interaktif untuk guru madrasah Kementerian Agama RI.
+
+Tugas Anda adalah merancang dan menghasilkan 1 FILE HTML LENGKAP (Single File HTML5 + CSS3 + JavaScript) yang mandiri, responsif, dan siap dibuka langsung di browser.
+
+Spesifikasi Media Pembelajaran:
+- Jenjang Pendidikan: ${jenjang}
+- Mata Pelajaran: ${mapel}
+- Kelas / Fase: ${kelas}
+- Topik Pembelajaran: ${materi}
+- Capaian/Tujuan Pembelajaran: ${tujuan}
+- Bentuk Media: ${jenis}
+- Moda Akses: ${moda}
+
+Persyaratan Pedagogis & Interaktivitas:
+1. Sediakan visualisasi interaktif / tombol kontrol manipulasi variabel yang relevan dengan usia peserta didik.
+2. Tampilkan respon visual seketika (real-time feedback) disertai penjelasan konsep jika murid memilih aksi tertentu.
+3. Desain antarmuka bersih, estetis, modern bernuansa edukatif, ramah layar sentuh (smartphone) dan nyaman di proyektor/laptop.
+4. Sertakan kuis mini / evaluasi formatif interaktif dengan skor akhir.
+
+Output Teknis:
+Hasilkan seluruh kode utuh dalam SATU blok file HTML tanpa memotong kode dan tanpa dependensi rumit agar dapat dijalankan secara lancar.`;
+
+      document.getElementById('practicePromptOutput').value = generated;
+      showToast('Prompt berhasil digenerate! Silakan salin ke AI.');
+    }
+
+    function copyGeneratedPracticePrompt() {
+      const promptText = document.getElementById('practicePromptOutput').value;
+      if (!promptText || promptText.includes('Klik tombol')) {
+        generatePracticePrompt();
+      }
+      copyText(document.getElementById('practicePromptOutput').value);
+    }
+
+    // Initial Load
+    window.addEventListener('DOMContentLoaded', () => {
+      updateSlideView();
+      buildTocGrid();
+    });
+  </script>
+</body>
+</html>
