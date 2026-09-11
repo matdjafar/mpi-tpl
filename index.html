@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pelatihan MPI Berbasis AI - Guru Madrasah (Kemenag RI)</title>
+  <title>Pelatihan MPI Berbasis AI - Guru Madrasah (Kanwil Kemenag Provinsi Gorontalo)</title>
   
   <!-- Google Fonts: Poppins untuk Headings & Inter untuk Body Text -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -91,7 +91,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 36px;
+      padding: 12px 36px;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border);
@@ -172,7 +172,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      padding: 24px 44px;
+      padding: 22px 40px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -195,7 +195,7 @@
 
     /* Typography & Section Tags */
     .slide-header {
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       flex-shrink: 0;
     }
     .category-tag {
@@ -221,7 +221,7 @@
       line-height: 1.2;
     }
     .slide-lead {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
       margin-top: 4px;
       line-height: 1.4;
@@ -341,7 +341,7 @@
       -webkit-text-fill-color: transparent;
     }
     .cover-sub {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: var(--text-muted);
       font-weight: 500;
       margin-bottom: 22px;
@@ -538,27 +538,27 @@
       border-color: #bbf7d0;
     }
 
-    /* Form Practice Canvas */
     .canvas-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.15fr 0.85fr;
       gap: 18px;
-      height: calc(100% - 70px);
+      height: calc(100% - 65px);
     }
     .form-group-wrap {
       background: white;
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 16px;
+      padding: 14px 18px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 9px;
       overflow-y: auto;
+      box-shadow: var(--shadow-sm);
     }
     .input-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      gap: 10px;
     }
     .form-field {
       display: flex;
@@ -566,37 +566,69 @@
       gap: 3px;
     }
     .form-field label {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
       color: var(--primary-dark);
       text-transform: uppercase;
+      letter-spacing: 0.4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
     .form-field input, .form-field select, .form-field textarea {
-      padding: 8px 10px;
+      padding: 7px 10px;
       border: 1px solid var(--border);
       border-radius: 6px;
       font-family: inherit;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
+      background: #ffffff;
+      color: var(--text-main);
     }
     .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(15,81,50,0.1);
+      box-shadow: 0 0 0 2px rgba(15,81,50,0.12);
+    }
+    .badge-optional {
+      font-size: 0.65rem;
+      color: var(--accent);
+      background: rgba(212,175,55,0.15);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+    .attachment-box-highlight {
+      background: #f0fdf4;
+      border: 1px dashed var(--primary);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.73rem;
+      color: var(--primary-dark);
+      display: none;
+      line-height: 1.35;
+    }
+    .attachment-box-highlight.visible {
+      display: block;
     }
     .btn-gen {
       background: linear-gradient(135deg, var(--primary), var(--primary-light));
       color: white;
       border: 1px solid var(--accent);
-      padding: 10px;
+      padding: 9px;
       border-radius: 8px;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      margin-top: 4px;
+      margin-top: 2px;
+      transition: all 0.2s;
+    }
+    .btn-gen:hover {
+      background: var(--primary-dark);
+      box-shadow: var(--shadow-sm);
     }
 
     /* Checklist Grid */
@@ -794,8 +826,8 @@
     <!-- Top Navigation Header -->
     <header class="navbar">
       <div class="brand-group">
-        <span class="badge-kemenag">TIM PENGEMBANG LITERASI PROVINSI GORONTALO</span>
-        <span class="topic-title">Pelatihan Pembuatan MPI Berbasis AI • Madrasah Hebat Bermartabat</span>
+        <span class="badge-kemenag">KANWIL KEMENAG PROVINSI GORONTALO</span>
+        <span class="topic-title">Pelatihan Pembuatan MPI Berbasis AI • Madrasah Mandiri Berprestasi</span>
       </div>
       <div class="nav-actions">
         <button class="btn-icon-top" onclick="toggleOverviewModal()" title="Lihat Daftar Slide">
@@ -816,7 +848,7 @@
       <section class="slide active" data-slide="1">
         <div class="cover-layout">
           <div>
-            <span class="cover-tagline">🚀 Pelatihan Guru Madrasah Digital 4.0</span>
+            <span class="cover-tagline">🚀 Kanwil Kemenag Provinsi Gorontalo • Literasi Digital 4.0</span>
             <h1 class="cover-heading">Pembuatan Media Pembelajaran Interaktif (MPI) <span>Berbasis AI</span></h1>
             <p class="cover-sub">Dari Ide, Prompt, Generate, Iterasi hingga Publikasi untuk Guru MI, MTs, dan MA</p>
             
@@ -824,14 +856,14 @@
               <img src="https://iili.io/CSAHRQ1.png" alt="Rahmat Djafar, S.Pd., Gr" class="presenter-img" onerror="this.src='https://placehold.co/100x100/0F5132/D4AF37?text=RD'">
               <div>
                 <div class="presenter-name">Rahmat Djafar, S.Pd., Gr.</div>
-                <div class="presenter-title">Instruktur & Fasilitator Media Pembelajaran Digital Madrasah</div>
+                <div class="presenter-title">Guru Matematika SMA Islam Terpadu Al Ishlah & Kreator Media Pembelajaran Digital Ruang Murid</div>
               </div>
             </div>
           </div>
 
           <div class="cover-hero-box">
             <div class="cover-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-            <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 8px; color: var(--accent);">Transformasi Digital Madrasah</h3>
+            <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 8px; color: var(--accent);">Transformasi Digital Madrasah Gorontalo</h3>
             <p style="font-size: 0.8rem; line-height: 1.5; opacity: 0.9;">"Guru tidak harus menjadi programmer untuk menciptakan media pembelajaran interaktif berkualitas tinggi."</p>
             <div class="cover-badges-row">
               <span class="badge-pill">🎒 MI</span>
@@ -959,7 +991,7 @@
         <div class="slide-header">
           <span class="category-tag">Kompetensi Peserta</span>
           <h2 class="slide-h1">10 Capaian Hasil Belajar Guru Madrasah</h2>
-          <p class="slide-lead">Setelah mengikuti sesi ini, Bapak/Ibu guru diproyeksikan menguasai:</p>
+          <p class="slide-lead">Setelah mengikuti sesi Kanwil Kemenag Prov. Gorontalo ini, Bapak/Ibu guru diproyeksikan menguasai:</p>
         </div>
 
         <div class="grid-2">
@@ -984,7 +1016,6 @@
         </div>
       </section>
 
-      <!-- ==================== BAGIAN 1: MENGAPA MPI? ==================== -->
       <!-- SLIDE 5: TANTANGAN PEMBELAJARAN MADRASAH -->
       <section class="slide" data-slide="5">
         <div class="slide-header">
@@ -1075,7 +1106,6 @@
         </div>
       </section>
 
-      <!-- ==================== BAGIAN 2: MENGENAL MPI ==================== -->
       <!-- SLIDE 8: APA ITU MPI -->
       <section class="slide" data-slide="8">
         <div class="slide-header">
@@ -1179,7 +1209,6 @@
         </div>
       </section>
 
-      <!-- ==================== BAGIAN 3: BENTUK-BENTUK MPI ==================== -->
       <!-- SLIDE 11: 5 BENTUK MEDIA INTERAKTIF -->
       <section class="slide" data-slide="11">
         <div class="slide-header">
@@ -1325,7 +1354,6 @@
         </div>
       </section>
 
-      <!-- ==================== BAGIAN 4: PERAN AI ==================== -->
       <!-- SLIDE 15: AI SEBAGAI CO-CREATOR -->
       <section class="slide" data-slide="15">
         <div class="slide-header">
@@ -1391,7 +1419,6 @@
         </div>
       </section>
 
-      <!-- ==================== BAGIAN 5: OFFLINE, ONLINE, HYBRID ==================== -->
       <!-- SLIDE 17: 3 MODEL MPI -->
       <section class="slide" data-slide="17">
         <div class="slide-header">
@@ -1503,7 +1530,6 @@
         </div>
       </section>
 
-      <!-- ==================== BAGIAN 6: PROMPT ENGINEERING ==================== -->
       <!-- SLIDE 21: PROMPT UMUM VS PROMPT TERSTRUKTUR -->
       <section class="slide" data-slide="21">
         <div class="slide-header">
@@ -1550,7 +1576,7 @@
           </div>
           <div class="card accent-card">
             <div class="card-title">2. AUDIENCE</div>
-            <p class="card-desc">"Untuk murid kelas 7 MTs / kelas 11 MA dengan bahasa komunikatif..."</p>
+            <p class="card-desc">"Untuk murid kelas 7 MTs / kelas 11 MA dengan karakteristik kontekstual..."</p>
           </div>
           <div class="card cyan-card">
             <div class="card-title">3. TOPIK & TUJUAN</div>
@@ -1581,27 +1607,24 @@
 
         <div class="prompt-box" id="masterPromptCode">
 <button class="btn-copy" onclick="copyMasterPrompt()">📋 Salin Prompt</button>
-Bertindaklah sebagai Senior Instructional Designer dan Pengembang Media Pembelajaran Interaktif.
+Bertindaklah sebagai Senior Instructional Designer dan Pengembang Media Pembelajaran Interaktif untuk madrasah binaan Kanwil Kemenag Provinsi Gorontalo.
 Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) untuk:
 
 1. Jenjang: [MI / MTs / MA]
 2. Mata Pelajaran: [Nama Mapel, misal: IPA / Fikih / Matematika]
 3. Kelas / Topik: [Misal: Kelas VIII / Hukum Newton]
 4. Capaian Pembelajaran: [Siswa mampu ...]
-5. Bentuk Media: [Simulasi / Lab Maya / Kuis Interaktif / Gim Edukasi]
-6. Mekanik Interaktivitas:
+5. Profil Murid & Konteks Madrasah: [Karakter aktif / visual / wilayah pesisir / agraris]
+6. Bentuk Media: [Simulasi / Lab Maya / Kuis Interaktif / Gim Edukasi]
+7. Mekanik Interaktivitas & Desain Tampilan:
    - Slider / Tombol untuk manipulasi variabel
-   - Respon visual real-time di layar
-   - Umpan balik (feedback) instan penjelasan konsep
-7. Desain Visual:
-   - Modern, bersih, ramah anak/remaja, responsif (HP & Laptop)
-   - Warna bertema edukatif dan tidak melelahkan mata
+   - Desain visual estetik modern ramah anak madrasah
+   - Respon visual real-time di layar & feedback instan penjelasan konsep
 8. Output Teknis:
    - Hasilkan dalam SATU blok kode HTML lengkap yang siap dibuka di browser secara OFFLINE tanpa dependensi eksternal yang rumit.
         </div>
       </section>
 
-      <!-- ==================== BAGIAN 7: WORKFLOW PEMBUATAN ==================== -->
       <!-- SLIDE 24: 7 LANGKAH KERJA -->
       <section class="slide" data-slide="24">
         <div class="slide-header">
@@ -1725,7 +1748,6 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
         </div>
       </section>
 
-      <!-- ==================== BAGIAN 8: UJI KUALITAS & ETIKA ==================== -->
       <!-- SLIDE 27: CHECKLIST SEBELUM KELAS -->
       <section class="slide" data-slide="27">
         <div class="slide-header">
@@ -1812,7 +1834,6 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
         </div>
       </section>
 
-      <!-- ==================== BAGIAN 9: PUBLIKASI ==================== -->
       <!-- SLIDE 29: CARA MEMBAGIKAN MPI -->
       <section class="slide" data-slide="29">
         <div class="slide-header">
@@ -1848,7 +1869,7 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
         <div class="slide-header">
           <span class="category-tag">Bagian 10: Praktik Mandiri</span>
           <h2 class="slide-h1">Tantangan Praktik: Saatnya Guru Mencipta!</h2>
-          <p class="slide-lead">SOP langkah demi langkah kegiatan workshop pembuatan media hari ini:</p>
+          <p class="slide-lead">SOP langkah demi langkah kegiatan workshop pembuatan media hari ini di Kanwil Kemenag Prov. Gorontalo:</p>
         </div>
 
         <div class="grid-2">
@@ -1856,13 +1877,13 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
             <h4 style="font-family: var(--font-heading); color: var(--primary-dark); margin-bottom: 8px;">📋 Tahapan Kerja Peserta:</h4>
             <ol style="font-size: 0.82rem; color: var(--text-main); padding-left: 18px; line-height: 1.6;">
               <li>Pilih 1 materi/topik yang akan diajarkan minggu depan.</li>
-              <li>Tentukan jenjang: <b>MI, MTs, atau MA</b>.</li>
+              <li>Tentukan jenjang: <b>MI, MTs, atau MA</b> serta profil karakter murid madrasah.</li>
               <li>Pilih format: <b>Lab Maya / Gim / Kuis / Flashcard / MPI Modular</b>.</li>
-              <li>Tentukan moda: <b>Offline (Single HTML) / Online / Hybrid</b>.</li>
+              <li>Pilih opsi: Menyiapkan soal & materi mandiri untuk dilampirkan atau dibuatkan AI.</li>
+              <li>Deskripsikan preferensi desain & tampilan yang diinginkan.</li>
               <li>Isi Canvas Praktik pada slide berikutnya untuk generate prompt.</li>
-              <li>Jalankan di AI (Gemini / ChatGPT / Claude).</li>
-              <li>Simpan kode sebagai <code>index.html</code> dan buka di browser.</li>
-              <li>Lakukan iterasi perbaikan minimal 2 kali.</li>
+              <li>Jalankan prompt di AI (Gemini / ChatGPT / Claude) bersama lampiran file jika ada.</li>
+              <li>Simpan kode sebagai <code>index.html</code> dan lakukan iterasi perbaikan.</li>
             </ol>
           </div>
 
@@ -1870,26 +1891,26 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
             <div style="font-size: 3rem; margin-bottom: 8px;">⏱️</div>
             <h3 style="font-family: var(--font-heading); color: var(--primary-dark); font-size: 1.2rem;">Waktu Praktik: 30 Menit</h3>
             <p class="card-desc" style="margin-top: 6px;">
-              Fasilitator akan berkeliling mendampingi Bapak/Ibu dalam menguji hasil kode di browser laptop masing-masing.
+              Fasilitator akan mendampingi Bapak/Ibu guru dalam menguji prototipe media interaktif di laptop masing-masing.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 31: CANVAS GENERATOR PROMPT PRAKTIK INTERAKTIF -->
+      <!-- SLIDE 31: CANVAS GENERATOR PROMPT PRAKTIK INTERAKTIF (REVISED) -->
       <section class="slide" data-slide="31">
         <div class="slide-header">
-          <span class="category-tag">Bagian 10: Praktik Mandiri</span>
+          <span class="category-tag">Bagian 10: Praktik Mandiri • Kanwil Kemenag Prov. Gorontalo</span>
           <h2 class="slide-h1">Interactive Canvas: Generator Prompt MPI Instan</h2>
-          <p class="slide-lead">Isi form rancangan pembelajaran di bawah untuk menyusun prompt otomatis siap pakai:</p>
+          <p class="slide-lead">Lengkapi profil pembelajaran, karakter murid, kondisi geografis, lampiran dokumen, dan deskripsi desain tampilan di bawah ini:</p>
         </div>
 
         <div class="canvas-grid">
-          <!-- Form Input -->
+          <!-- Form Input Kolom Tambahan Sesuai Revisi -->
           <div class="form-group-wrap">
             <div class="input-row">
               <div class="form-field">
-                <label>Jenjang</label>
+                <label>Jenjang Pendidikan</label>
                 <select id="canvasJenjang">
                   <option value="Madrasah Ibtidaiyah (MI)">MI (Ibtidaiyah)</option>
                   <option value="Madrasah Tsanawiyah (MTs)" selected>MTs (Tsanawiyah)</option>
@@ -1898,57 +1919,89 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
               </div>
               <div class="form-field">
                 <label>Mata Pelajaran</label>
-                <input type="text" id="canvasMapel" value="IPA / Fisika" placeholder="Contoh: Fikih, Biologi">
+                <input type="text" id="canvasMapel" value="IPA / Fisika" placeholder="Contoh: Fikih, Biologi, Sejarah">
               </div>
             </div>
 
             <div class="input-row">
               <div class="form-field">
                 <label>Kelas / Fase</label>
-                <input type="text" id="canvasKelas" value="Kelas VII / Fase D" placeholder="Contoh: Kelas IV MI">
+                <input type="text" id="canvasKelas" value="Kelas VII / Fase D" placeholder="Contoh: Kelas IV MI / Fase B">
               </div>
               <div class="form-field">
                 <label>Jenis Media</label>
                 <select id="canvasJenis">
-                  <option value="Simulasi / Lab Maya Interaktif">Simulasi / Lab Maya</option>
-                  <option value="Gim Edukasi Konsep">Gim Edukasi</option>
-                  <option value="Kuis Interaktif Cerdas">Kuis Interaktif</option>
-                  <option value="MPI Eksplorasi Modular">MPI Modular Lengkap</option>
+                  <option value="Simulasi / Lab Maya Interaktif">Simulasi / Lab Maya Interaktif</option>
+                  <option value="Gim Edukasi Konsep">Gim Edukasi Tantangan</option>
+                  <option value="Kuis Interaktif Cerdas">Kuis Interaktif Evaluasi</option>
+                  <option value="MPI Eksplorasi Modular" selected>MPI Modular Lengkap</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- REVISI POINT 1: Karakter Murid & Kondisi Geografis Madrasah -->
+            <div class="input-row">
+              <div class="form-field">
+                <label>Karakter Murid <span class="badge-optional">Profil Siswa</span></label>
+                <input type="text" id="canvasKarakter" value="Aktif kinestetik, menyukai visual menarik, antusias kompetisi kelompok" placeholder="Misal: Gemar audio-visual, literasi pemula, suka teka-teki">
+              </div>
+              <div class="form-field">
+                <label>Kondisi Geografis Madrasah <span class="badge-optional">Konteks Wilayah</span></label>
+                <input type="text" id="canvasGeografis" value="Daerah pesisir pantai & agraris (Provinsi Gorontalo), akses internet fluktuatif" placeholder="Contoh: Daerah pesisir Danau Limboto, pegunungan, kepulauan, perkotaan">
+              </div>
+            </div>
+
+            <div class="input-row">
+              <div class="form-field">
+                <label>Topik Materi</label>
+                <input type="text" id="canvasMateri" value="Siklus Air, Presipitasi & Konservasi Lingkungan" placeholder="Misal: Rukun Wudu, Ikatan Kimia, Sel Hewan">
+              </div>
+              <div class="form-field">
+                <label>Moda Media</label>
+                <select id="canvasModa">
+                  <option value="Offline (Single File HTML mandiri 100% tanpa internet)">Offline (1 File HTML Mandiri Tanpa Kuota)</option>
+                  <option value="Hybrid (Offline interaktif dengan opsi sinkron nilai)">Hybrid (Offline + Sync)</option>
+                  <option value="Online (Cloud / Web based)">Online (Cloud / Web Link)</option>
                 </select>
               </div>
             </div>
 
             <div class="form-field">
-              <label>Topik Materi</label>
-              <input type="text" id="canvasMateri" value="Siklus Air dan Presipitasi" placeholder="Misal: Rukun Wudu, Ikatan Kimia">
+              <label>Tujuan Pembelajaran (Indikator Kunci)</label>
+              <input type="text" id="canvasTujuan" value="Murid dapat memanipulasi suhu dan melihat proses evaporasi hingga hujan secara langsung" placeholder="Capaian target kemampuan murid">
             </div>
 
+            <!-- REVISI POINT 1: Pilihan Melampirkan Soal & Materi Mandiri -->
             <div class="form-field">
-              <label>Tujuan Pembelajaran</label>
-              <input type="text" id="canvasTujuan" value="Murid dapat memanipulasi suhu dan melihat proses evaporasi hingga hujan" placeholder="Capaian target murid">
-            </div>
-
-            <div class="form-field">
-              <label>Moda Media</label>
-              <select id="canvasModa">
-                <option value="Offline (Single File HTML mandiri tanpa internet)">Offline (1 File HTML Mandiri)</option>
-                <option value="Hybrid (Offline dengan sinkronisasi nilai)">Hybrid</option>
-                <option value="Online (Terkoneksi API / Cloud)">Online</option>
+              <label>Lampiran Dokumen Materi / Soal Mandiri</label>
+              <select id="canvasLampiran" onchange="toggleAttachmentInfo()">
+                <option value="tidak">Tidak (Minta AI membuatkan materi dan bank soal secara otomatis)</option>
+                <option value="ya">Ya, Saya Akan Melampirkan File Materi / Bank Soal Mandiri ke AI</option>
               </select>
             </div>
 
+            <div class="attachment-box-highlight" id="attachmentNoticeBox">
+              📎 <b>Mode Lampirkan File Aktif:</b> Prompt akan mencantumkan instruksi bahwa Anda menyertakan file materi/soal (PDF/Word/Teks) bersamaan saat mengirimkan perintah ini ke AI (Gemini / ChatGPT / Claude).
+            </div>
+
+            <!-- REVISI POINT 1: Kolom Deskripsi Tampilan / Desain Visual -->
+            <div class="form-field">
+              <label>Deskripsi Tampilan & Preferensi Visual <span class="badge-optional">UI/UX</span></label>
+              <textarea id="canvasTampilan" rows="2" placeholder="Deskripsikan tampilan: misalnya warna hijau toska dan emas, gaya kartu minimalis, tombol besar ramah smartphone, ada animasi transisi halus, tata letak dashboard modern..."></textarea>
+            </div>
+
             <button class="btn-gen" onclick="generatePracticePrompt()">
-              ⚡ Hasilkan Prompt Praktik
+              ⚡ Hasilkan Prompt Praktik Siap Pakai
             </button>
           </div>
 
           <!-- Output Prompt Box -->
-          <div style="display: flex; flex-direction: column; background: #0f172a; border-radius: var(--radius-md); padding: 14px; position: relative;">
+          <div style="display: flex; flex-direction: column; background: #0f172a; border-radius: var(--radius-md); padding: 14px; position: relative; border: 1px solid #334155;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-              <span style="font-size: 0.75rem; color: var(--accent); font-weight: 700;">PROMPT SIAP SALIN KE AI:</span>
+              <span style="font-size: 0.75rem; color: var(--accent); font-weight: 700; letter-spacing: 0.5px;">PROMPT SIAP SALIN KE AI:</span>
               <button class="btn-copy" style="position: static;" onclick="copyGeneratedPracticePrompt()">📋 Salin Prompt</button>
             </div>
-            <textarea id="practicePromptOutput" style="flex: 1; width: 100%; background: transparent; border: none; color: #e2e8f0; font-family: monospace; font-size: 0.78rem; line-height: 1.4; resize: none; outline: none;" readonly>Klik tombol "Hasilkan Prompt Praktik" di sebelah kiri untuk membuat prompt yang dipersonalisasi...</textarea>
+            <textarea id="practicePromptOutput" style="flex: 1; width: 100%; background: transparent; border: none; color: #e2e8f0; font-family: monospace; font-size: 0.77rem; line-height: 1.45; resize: none; outline: none;" readonly>Klik tombol "Hasilkan Prompt Praktik Siap Pakai" di sebelah kiri untuk menyusun prompt instruksional terstruktur yang memuat karakter murid, kondisi geografis, opsi lampiran dokumen, dan deskripsi desain visual tampilan...</textarea>
           </div>
         </div>
       </section>
@@ -1956,7 +2009,7 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
       <!-- SLIDE 32: PENUTUP & KATA BIJAK -->
       <section class="slide" data-slide="32">
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 0 40px;">
-          <span class="cover-tagline">🌟 Refleksi Akhir Pelatihan</span>
+          <span class="cover-tagline">🌟 Kantor Wilayah Kementerian Agama Provinsi Gorontalo</span>
           
           <h2 style="font-family: var(--font-heading); font-size: 1.85rem; color: var(--primary-dark); margin: 8px 0 14px; max-width: 900px; line-height: 1.3;">
             "Guru Tidak Harus Menjadi Programmer untuk Menciptakan Pembelajaran Digital yang Bermakna."
@@ -1964,9 +2017,9 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
 
           <div class="card accent-card" style="max-width: 800px; padding: 16px 24px; margin-bottom: 20px;">
             <p style="font-size: 0.95rem; color: var(--primary-dark); font-weight: 600; line-height: 1.6;">
-              Mulai dari masalah pembelajaran di kelas.<br>
-              Rancang pengalaman belajar yang menyenangkan.<br>
-              Gunakan AI untuk membantu mewujudkannya menjadi media interaktif.
+              Mulai dari tantangan kontekstual di madrasah Gorontalo.<br>
+              Rancang pengalaman belajar interaktif yang menggugah nalar murid.<br>
+              Gunakan AI sebagai mitra cerdas untuk mewujudkan media berkualitas mandiri.
             </p>
           </div>
 
@@ -1974,7 +2027,7 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
             <img src="https://iili.io/CSAHRQ1.png" alt="Rahmat Djafar, S.Pd., Gr" class="presenter-img" style="width: 50px; height: 50px;" onerror="this.src='https://placehold.co/100x100/0F5132/D4AF37?text=RD'">
             <div style="text-align: left;">
               <div style="font-family: var(--font-heading); font-weight: 700; color: var(--primary-dark); font-size: 0.95rem;">Rahmat Djafar, S.Pd., Gr.</div>
-              <div style="font-size: 0.75rem; color: var(--text-muted);">GURU SMA ISLAM TERPADU AL ISHLAH GORONTALO • PENGEMBANG MEDIA PEMBELAJARAN RUANG MURID</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">GURU SMA ISLAM TERPADU AL ISHLAH GORONTALO • FASILITATOR LITERASI DIGITAL MADRASAH GORONTALO</div>
             </div>
           </div>
 
@@ -2009,7 +2062,7 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
     <div class="modal-overlay" id="overviewModal" onclick="closeOverviewIfOutside(event)">
       <div class="modal-card">
         <div class="modal-header">
-          <h3 style="font-family: var(--font-heading); color: var(--primary-dark); font-size: 1.1rem;">📑 Indeks 32 Slide Presentasi</h3>
+          <h3 style="font-family: var(--font-heading); color: var(--primary-dark); font-size: 1.1rem;">📑 Indeks 32 Slide Presentasi • Kanwil Kemenag Prov. Gorontalo</h3>
           <button class="btn-icon-top" onclick="toggleOverviewModal()">Tutup ✕</button>
         </div>
         <div class="modal-grid-toc" id="tocGrid">
@@ -2030,7 +2083,7 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
 
     // Titles List for TOC Index
     const slideTitles = [
-      "1. Cover & Identitas Pelatihan",
+      "1. Cover & Identitas Pelatihan Gorontalo",
       "2. Ice Breaking & Poling Peminatan",
       "3. Roadmap Perjalanan 7 Langkah",
       "4. 10 Capaian Hasil Belajar",
@@ -2060,7 +2113,7 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
       "28. Validasi 4 Lapis & Etika AI",
       "29. Jalur Publikasi Offline & Online",
       "30. SOP & Tantangan Praktik Guru",
-      "31. Interactive Canvas Generator",
+      "31. Interactive Canvas Generator (Revised)",
       "32. Penutup & Refleksi Bermakna"
     ];
 
@@ -2221,7 +2274,7 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
       const cards = document.querySelectorAll('.ice-card');
       cards.forEach(c => c.classList.remove('selected'));
       element.classList.add('selected');
-      showToast('Pilihan Anda tercatat di sesi pelatihan!');
+      showToast('Pilihan Anda tercatat di sesi pelatihan Gorontalo!');
     }
 
     // Checklist on Slide 27
@@ -2229,37 +2282,65 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
       element.classList.toggle('checked');
     }
 
-    // Interactive Practice Canvas on Slide 31
+    function toggleAttachmentInfo() {
+      const lampiranSelect = document.getElementById('canvasLampiran').value;
+      const noticeBox = document.getElementById('attachmentNoticeBox');
+      if (lampiranSelect === 'ya') {
+        noticeBox.classList.add('visible');
+      } else {
+        noticeBox.classList.remove('visible');
+      }
+    }
+
+    // Interactive Practice Canvas on Slide 31 (Revised with new fields)
     function generatePracticePrompt() {
       const jenjang = document.getElementById('canvasJenjang').value;
       const mapel = document.getElementById('canvasMapel').value.trim() || 'Mata Pelajaran Madrasah';
       const kelas = document.getElementById('canvasKelas').value.trim() || 'Sesuai Fase';
       const jenis = document.getElementById('canvasJenis').value;
-      const materi = document.getElementById('canvasMateri').value.trim() || 'Topik Utama';
-      const tujuan = document.getElementById('canvasTujuan').value.trim() || 'Memahami konsep dasar secara interaktif';
+      const karakter = document.getElementById('canvasKarakter').value.trim() || 'Aktif, visual, menyukai studi kasus interaktif';
+      const geografis = document.getElementById('canvasGeografis').value.trim() || 'Lingkungan madrasah di Provinsi Gorontalo';
+      const materi = document.getElementById('canvasMateri').value.trim() || 'Topik Materi Esensial';
       const moda = document.getElementById('canvasModa').value;
+      const tujuan = document.getElementById('canvasTujuan').value.trim() || 'Memahami konsep dasar secara interaktif dan aplikatif';
+      const isLampirkan = document.getElementById('canvasLampiran').value === 'ya';
+      const tampilanDesc = document.getElementById('canvasTampilan').value.trim() || 'Desain bernuansa modern, bersih, perpaduan warna hijau islami dan emas elegan, tata letak kartu intuitif, tombol interaktif besar yang nyaman diakses lewat smartphone maupun laptop, serta tipografi jelas dan ramah mata.';
 
-      const generated = `Bertindaklah sebagai Senior Instructional Designer dan Pengembang Media Pembelajaran Interaktif untuk guru madrasah Kementerian Agama RI.
+      // Kondisional instruksi lampiran mandiri
+      const instruksiLampiran = isLampirkan 
+        ? `[PENTING - REFERENSI MATERI & BANK SOAL TERLAMPIR]:
+Saya MELAMPIRKAN file dokumen materi dan butir soal mandiri bersama instruksi ini. Harap gunakan isi file dokumen yang saya lampirkan tersebut sebagai konten inti materi pelajaran, kisi-kisi fakta, kunci jawaban, dan butir evaluasi kuis di dalam media pembelajaran yang Anda susun.`
+        : `[SUMBER MATERI & BANK SOAL]:
+Buatkan ringkasan materi yang padat, akurat secara keilmuan, serta 5 butir soal evaluasi kuis formatif interaktif beserta pembahasan lengkapnya secara otomatis sesuai kurikulum madrasah.`;
 
-Tugas Anda adalah merancang dan menghasilkan 1 FILE HTML LENGKAP (Single File HTML5 + CSS3 + JavaScript) yang mandiri, responsif, dan siap dibuka langsung di browser.
+      const generated = `Bertindaklah sebagai Senior Instructional Designer dan Pengembang Web Front-End untuk guru madrasah di lingkungan Kantor Wilayah Kementerian Agama Provinsi Gorontalo.
 
-Spesifikasi Media Pembelajaran:
+Tugas Anda adalah merancang dan menghasilkan 1 FILE HTML LENGKAP (Single File HTML5 + CSS3 + JavaScript mandiri) yang siap dijalankan langsung di browser tanpa dependensi eksternal yang rumit.
+
+1. PROFIL PEMBELAJARAN & SASARAN:
 - Jenjang Pendidikan: ${jenjang}
 - Mata Pelajaran: ${mapel}
 - Kelas / Fase: ${kelas}
+- Karakter Murid: ${karakter}
+- Kondisi Geografis Madrasah: ${geografis} (Integrasikan contoh kasus atau nuansa kontekstual yang relevan dengan lingkungan setempat jika memungkinkan)
 - Topik Pembelajaran: ${materi}
-- Capaian/Tujuan Pembelajaran: ${tujuan}
+- Capaian / Tujuan Belajar: ${tujuan}
 - Bentuk Media: ${jenis}
 - Moda Akses: ${moda}
 
-Persyaratan Pedagogis & Interaktivitas:
-1. Sediakan visualisasi interaktif / tombol kontrol manipulasi variabel yang relevan dengan usia peserta didik.
-2. Tampilkan respon visual seketika (real-time feedback) disertai penjelasan konsep jika murid memilih aksi tertentu.
-3. Desain antarmuka bersih, estetis, modern bernuansa edukatif, ramah layar sentuh (smartphone) dan nyaman di proyektor/laptop.
-4. Sertakan kuis mini / evaluasi formatif interaktif dengan skor akhir.
+2. DESKRIPSI TAMPILAN & DESAIN VISUAL:
+${tampilanDesc}
 
-Output Teknis:
-Hasilkan seluruh kode utuh dalam SATU blok file HTML tanpa memotong kode dan tanpa dependensi rumit agar dapat dijalankan secara lancar.`;
+3. KETENTUAN KONTEN & LAMPIRAN:
+${instruksiLampiran}
+
+4. PERSYARATAN INTERAKTIVITAS & PEDAGOGIS:
+- Sediakan kontrol interaktif (slider, drag-and-drop, atau tombol manipulasi variabel) yang relevan dengan materi.
+- Tampilkan respon visual seketika (real-time feedback) dan dialog umpan balik edukatif (bukan hanya benar/salah, tetapi memandu penalaran murid).
+- Sediakan modul evaluasi kuis mini interaktif dengan skor akhir dan pembahasan ringkas.
+
+5. OUTPUT TEKNIS:
+Hasilkan seluruh kode utuh dalam SATU blok kode HTML mandiri (termasuk tag <style> dan <script>) tanpa kode terpotong agar dapat langsung disimpan sebagai file .html dan dibuka secara lancar.`;
 
       document.getElementById('practicePromptOutput').value = generated;
       showToast('Prompt berhasil digenerate! Silakan salin ke AI.');
@@ -2277,6 +2358,8 @@ Hasilkan seluruh kode utuh dalam SATU blok file HTML tanpa memotong kode dan tan
     window.addEventListener('DOMContentLoaded', () => {
       updateSlideView();
       buildTocGrid();
+      // Generate default practice prompt on load
+      generatePracticePrompt();
     });
   </script>
 </body>
