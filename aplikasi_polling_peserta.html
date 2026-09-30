@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polling Peserta - Pelatihan MPI Kemenag</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kemenag: {
+                            light: '#187a4d',
+                            DEFAULT: '#0F5132',
+                            dark: '#093320',
+                        },
+                        gold: {
+                            light: '#fef08a',
+                            DEFAULT: '#D4AF37',
+                            dark: '#a18429',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #f8fafc;
+            background-image: radial-gradient(circle at top right, #e2e8f0 0%, transparent 40%),
+                              radial-gradient(circle at bottom left, #dcfce7 0%, transparent 40%);
+            background-attachment: fixed;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .glass-header {
+            background: rgba(15, 81, 50, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #D4AF37;
+        }
+
+        .option-card {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .option-card:active {
+            transform: scale(0.96);
+        }
+        
+        .option-card.selected {
+            border-color: #0F5132;
+            background-color: #f0fdf4;
+            box-shadow: 0 0 0 3px rgba(15, 81, 50, 0.2);
+        }
+
+        /* Loading Spinner */
+        .loader {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #ffffff;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Progress Bar Animation */
+        .progress-bar-fill {
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="glass-header sticky top-0 z-40 shadow-lg px-4 py-4 text-center">
+        <div class="inline-block bg-white/20 text-gold-light text-[10px] font-bold px-3 py-1 rounded-full mb-2 tracking-wider border border-gold/30 uppercase">
+            Kanwil Kemenag Prov. Gorontalo
+        </div>
+        <h1 class="font-heading text-xl text-white font-bold leading-tight shadow-sm">
+            Pelatihan MPI Berbasis AI
+        </h1>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 w-full max-w-2xl mx-auto p-4 sm:p-6 pb-24">
+        
+        <!-- View 1: Voting Phase -->
+        <div id="votingView" class="space-y-6">
+            <div class="text-center space-y-2">
+                <h2 class="font-heading text-2xl font-bold text-kemenag-dark">Apa Pilihan Anda?</h2>
+                <p class="text-slate-500 text-sm">Pilih satu jenis media pembelajaran interaktif yang paling ingin Anda kembangkan hari ini.</p>
+            </div>
+
+            <!-- Grid Options -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="optionsContainer">
+                <!-- Diisi oleh JavaScript -->
+            </div>
+
+            <button id="submitBtn" onclick="submitVote()" disabled class="w-full bg-slate-300 text-slate-500 font-bold py-4 rounded-xl shadow-sm transition-all duration-300 font-heading text-lg">
+                Pilih Media Dulu
+            </button>
+        </div>
+
+        <!-- View 2: Results Phase (Hidden by default) -->
+        <div id="resultsView" class="hidden space-y-6 mt-4">
+            <div class="bg-white rounded-2xl p-6 shadow-xl border border-slate-100 text-center relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-kemenag to-gold"></div>
+                <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+                    ✓
+                </div>
+                <h2 class="font-heading text-2xl font-bold text-kemenag-dark mb-2">Terima Kasih!</h2>
+                <p class="text-slate-500 text-sm mb-6">Aspirasi Bapak/Ibu guru telah tersimpan. Berikut adalah tren pilihan sementara dari seluruh peserta pelatihan:</p>
+                
+                <!-- Results Container -->
+                <div id="resultsContainer" class="space-y-4 text-left">
+                    <!-- Diisi oleh JavaScript -->
+                </div>
+
+                <button onclick="fetchAndRenderResults()" class="mt-8 flex items-center justify-center gap-2 w-full bg-kemenag-light/10 text-kemenag hover:bg-kemenag hover:text-white font-semibold py-3 rounded-xl transition-colors border border-kemenag/20">
+                    <span>🔄</span> Perbarui Data Real-time
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto py-6 text-center text-xs text-slate-400 font-medium">
+        &copy; 2026 Tim Transformasi Digital Madrasah Gorontalo
+    </footer>
+
+    <!-- Full Screen Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-kemenag-dark/80 backdrop-blur-sm z-50 hidden flex-col items-center justify-center text-white">
+        <div class="loader mb-4"></div>
+        <p class="font-heading font-semibold text-lg animate-pulse" id="loadingText">Menyimpan Pilihan...</p>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white px-6 py-3 rounded-full shadow-2xl transition-all duration-300 translate-y-20 opacity-0 z-50 text-sm font-medium">
+        Pesan Toast
+    </div>
+
+    <script>
+        // ==========================================
+        // KONFIGURASI BACKEND
+        // ==========================================
+        // GANTI URL DI BAWAH DENGAN URL WEB APP GOOGLE APPS SCRIPT ANDA
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwxsqNS2ReAlpcDmRIbj4Hg3iMYZPjkXkDkBofP1J14WLbBodFmdpqEbkhlmsYhRo95CQ/exec'; 
+        
+        // ==========================================
+        // DATA APLIKASI
+        // ==========================================
+        const optionsData = [
+            { id: 0, icon: '🎮', name: 'Gim Edukasi' },
+            { id: 1, icon: '🧪', name: 'Lab Maya / Simulasi' },
+            { id: 2, icon: '📝', name: 'Kuis Cerdas' },
+            { id: 3, icon: '🤖', name: 'Chatbot AI' },
+            { id: 4, icon: '📊', name: 'LKPD Digital' },
+            { id: 5, icon: '💡', name: 'MPI Eksplorasi' },
+            { id: 6, icon: '🧩', name: 'Puzzle Istilah' },
+            { id: 7, icon: '✨', name: 'Flashcard' }
+        ];
+
+        let selectedOptionId = null;
+        let pollResults = [];
+
+        // ==========================================
+        // INISIALISASI
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Cek apakah user sudah pernah vote (disimpan di local storage browser)
+            const hasVoted = localStorage.getItem('kemenag_mpi_voted_id');
+            
+            if (hasVoted !== null) {
+                // Jika sudah, langsung tampilkan hasil
+                selectedOptionId = parseInt(hasVoted);
+                showResultsView();
+                fetchAndRenderResults();
+            } else {
+                // Jika belum, tampilkan form pemilihan
+                renderVotingOptions();
+            }
+        });
+
+        // ==========================================
+        // FUNGSI UI - VOTING
+        // ==========================================
+        function renderVotingOptions() {
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+
+            optionsData.forEach(opt => {
+                const card = document.createElement('div');
+                card.className = `option-card bg-white border-2 border-slate-200 rounded-2xl p-4 flex flex-col items-center justify-center text-center cursor-pointer shadow-sm`;
+                card.id = `opt-${opt.id}`;
+                card.onclick = () => selectOption(opt.id);
+                
+                card.innerHTML = `
+                    <div class="text-4xl mb-2">${opt.icon}</div>
+                    <div class="font-semibold text-slate-700 text-sm leading-tight">${opt.name}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function selectOption(id) {
+            selectedOptionId = id;
+            
+            // Reset semua card
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected', 'border-kemenag', 'bg-green-50');
+                card.classList.add('border-slate-200', 'bg-white');
+            });
+            
+            // Highlight card terpilih
+            const selectedCard = document.getElementById(`opt-${id}`);
+            selectedCard.classList.remove('border-slate-200', 'bg-white');
+            selectedCard.classList.add('selected', 'border-kemenag', 'bg-green-50');
+
+            // Aktifkan tombol submit
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = false;
+            btn.className = "w-full bg-gradient-to-r from-kemenag to-kemenag-light text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-heading text-lg transform hover:-translate-y-1";
+            btn.innerHTML = `Kirim Pilihan (${optionsData[id].icon})`;
+        }
+
+        // ==========================================
+        // FUNGSI API & SUBMIT
+        // ==========================================
+        async function submitVote() {
+            if (selectedOptionId === null) return;
+            
+            if (SCRIPT_URL.includes('AKfycbz_XXXXXXXXXXXX')) {
+                showToast("⚠️ Peringatan: URL Apps Script belum diubah. Simulasi berhasil.");
+                finishVotingSimulation();
+                return;
+            }
+
+            showLoading(true, "Mengirim ke server...");
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ voteIndex: selectedOptionId })
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    // Simpan status vote di perangkat user
+                    localStorage.setItem('kemenag_mpi_voted_id', selectedOptionId);
+                    pollResults = result.data;
+                    
+                    showLoading(false);
+                    showToast("✅ Berhasil! Pilihan Anda tersimpan.");
+                    
+                    showResultsView();
+                    renderResultsUI(pollResults);
+                } else {
+                    showLoading(false);
+                    showToast("❌ Gagal menyimpan: " + result.message);
+                }
+            } catch (error) {
+                showLoading(false);
+                showToast("📡 Koneksi terputus. Coba lagi nanti.");
+            }
+        }
+
+        function finishVotingSimulation() {
+            // Fungsi fallback jika belum setting Apps Script
+            localStorage.setItem('kemenag_mpi_voted_id', selectedOptionId);
+            pollResults = [15, 20, 25, 10, 18, 22, 12, 8]; // Data dummy
+            pollResults[selectedOptionId]++;
+            showResultsView();
+            renderResultsUI(pollResults);
+        }
+
+        async function fetchAndRenderResults() {
+            if (SCRIPT_URL.includes('AKfycbz_XXXXXXXXXXXX')) return;
+
+            showLoading(true, "Memperbarui data...");
+            try {
+                const response = await fetch(SCRIPT_URL + "?action=getVotes");
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    pollResults = result.data;
+                    renderResultsUI(pollResults);
+                }
+            } catch (error) {
+                showToast("📡 Gagal menarik data terbaru.");
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // ==========================================
+        // FUNGSI UI - HASIL POLLING
+        // ==========================================
+        function showResultsView() {
+            document.getElementById('votingView').classList.add('hidden');
+            document.getElementById('resultsView').classList.remove('hidden');
+            // Scroll ke atas
+            window.scrollTo(0, 0);
+        }
+
+        function renderResultsUI(dataArray) {
+            const container = document.getElementById('resultsContainer');
+            container.innerHTML = '';
+
+            const maxVotes = Math.max(...dataArray, 1);
+            
+            // Urutkan berdasarkan vote terbanyak
+            const sortedData = optionsData.map((opt, i) => ({
+                ...opt,
+                votes: dataArray[i] || 0
+            })).sort((a, b) => b.votes - a.votes);
+
+            sortedData.forEach((item, index) => {
+                const percentage = (item.votes / maxVotes) * 100;
+                const isUserChoice = item.id === selectedOptionId;
+                
+                // Warna beda untuk top 1, pilihan user, dan sisanya
+                let barColor = 'bg-slate-200';
+                if (index === 0) barColor = 'bg-gold';
+                else if (isUserChoice) barColor = 'bg-kemenag-light';
+
+                const html = `
+                    <div class="relative pt-1">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-xs font-semibold text-slate-700 uppercase flex items-center gap-2">
+                                ${item.icon} ${item.name} ${isUserChoice ? '<span class="bg-kemenag/10 text-kemenag px-2 py-0.5 rounded text-[10px]">Pilihan Anda</span>' : ''}
+                            </span>
+                            <span class="text-xs font-bold ${index === 0 ? 'text-gold-dark' : 'text-slate-500'}">${item.votes} Suara</span>
+                        </div>
+                        <div class="overflow-hidden h-3 mb-2 text-xs flex rounded-full bg-slate-100">
+                            <div style="width: 0%" data-target="${percentage}%" class="progress-bar-fill shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center ${barColor}"></div>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+
+            // Trigger animasi width setelah elemen masuk ke DOM
+            setTimeout(() => {
+                document.querySelectorAll('.progress-bar-fill').forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-target');
+                });
+            }, 100);
+        }
+
+        // ==========================================
+        // UTILITAS (LOADING & TOAST)
+        // ==========================================
+        function showLoading(show, text = "Memuat...") {
+            const overlay = document.getElementById('loadingOverlay');
+            document.getElementById('loadingText').innerText = text;
+            if (show) {
+                overlay.classList.remove('hidden');
+                overlay.classList.add('flex');
+            } else {
+                overlay.classList.add('hidden');
+                overlay.classList.remove('flex');
+            }
+        }
+
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            
+            // Reset state
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            clearTimeout(toastTimeout);
+            
+            // Hide after 3s
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
