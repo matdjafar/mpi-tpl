@@ -5,25 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pelatihan MPI Berbasis AI - Guru Madrasah (Kanwil Kemenag Provinsi Gorontalo)</title>
   
-  <!-- Google Fonts: Poppins untuk Headings & Inter untuk Body Text -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&family=Amiri:wght@700&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --primary: #0F5132;         /* Hijau Zamrud Kemenag */
-      --primary-dark: #093320;    /* Hijau Tua Deep */
-      --primary-light: #187a4d;   /* Hijau Emerald Segar */
-      --accent: #D4AF37;          /* Emas Elegan */
-      --accent-light: #f6ecd0;    /* Emas Lembut */
-      --cyan-accent: #0284c7;     /* Modern Cyan Aksen */
-      --bg-canvas: #092117;       /* Latar Belakang Luar */
-      --bg-slide: #ffffff;        /* Latar Putih Bersih Slide */
-      --bg-subtle: #f8fafc;       /* Latar Kontainer Abu/Offwhite */
-      --text-main: #1e293b;       /* Teks Utama Slate-900 */
-      --text-muted: #64748b;      /* Teks Sekunder */
-      --border: #e2e8f0;          /* Border Garis */
+      --primary: #0F5132;
+      --primary-dark: #093320;
+      --primary-light: #187a4d;
+      --accent: #D4AF37;
+      --accent-light: #f6ecd0;
+      --cyan-accent: #0284c7;
+      --bg-canvas: #092117;
+      --bg-slide: #ffffff;
+      --bg-subtle: #f8fafc;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
@@ -34,783 +33,147 @@
       --font-body: 'Inter', sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-font-smoothing: antialiased;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
 
     body {
-      font-family: var(--font-body);
-      background-color: var(--bg-canvas);
+      font-family: var(--font-body); background-color: var(--bg-canvas);
       background-image: radial-gradient(circle at 50% 0%, #174d34 0%, #081d14 100%);
-      color: var(--text-main);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      overflow: hidden;
-      user-select: none;
+      color: var(--text-main); display: flex; justify-content: center; align-items: center;
+      min-height: 100vh; overflow: hidden; user-select: none;
     }
 
-    /* Container 16:9 Display */
     .deck-container {
-      width: 100vw;
-      max-width: 1366px;
-      height: 100vh;
-      max-height: 768px;
-      background: var(--bg-slide);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      width: 100vw; max-width: 1366px; height: 100vh; max-height: 768px;
+      background: var(--bg-slide); position: relative; overflow: hidden;
+      display: flex; flex-direction: column; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
       border-radius: var(--radius-md);
     }
 
-    /* Progress Bar */
-    .top-progress-wrap {
-      width: 100%;
-      height: 5px;
-      background: rgba(212, 175, 55, 0.15);
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 100;
-    }
-    .top-progress-bar {
-      height: 100%;
-      width: 3.125%;
-      background: linear-gradient(90deg, var(--primary), var(--accent), #fef08a);
-      transition: width 0.35s ease;
-    }
+    .top-progress-wrap { width: 100%; height: 5px; background: rgba(212, 175, 55, 0.15); position: absolute; top: 0; left: 0; z-index: 100; }
+    .top-progress-bar { height: 100%; width: 3.125%; background: linear-gradient(90deg, var(--primary), var(--accent), #fef08a); transition: width 0.35s ease; }
 
-    /* Top Navigation Bar */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 36px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      z-index: 50;
-      height: 60px;
-    }
+    .navbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 36px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); z-index: 50; height: 60px; }
+    .brand-group { display: flex; align-items: center; gap: 12px; }
+    .badge-kemenag { background: var(--primary); color: var(--accent); padding: 4px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.8px; border: 1px solid rgba(212, 175, 55, 0.4); }
+    .topic-title { font-size: 0.85rem; font-weight: 700; color: var(--primary-dark); letter-spacing: -0.2px; }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .btn-icon-top { background: var(--bg-subtle); border: 1px solid var(--border); color: var(--text-main); padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.78rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
+    .btn-icon-top:hover { background: var(--primary); color: white; border-color: var(--primary); }
+    .slide-badge-num { background: var(--primary-light); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; }
 
-    .brand-group {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .badge-kemenag {
-      background: var(--primary);
-      color: var(--accent);
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 0.8px;
-      border: 1px solid rgba(212, 175, 55, 0.4);
-    }
-    .topic-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-      letter-spacing: -0.2px;
-    }
+    .viewport { flex: 1; position: relative; width: 100%; height: calc(100% - 116px); overflow: hidden; background: radial-gradient(circle at 90% 10%, rgba(212,175,55,0.06) 0%, transparent 40%), radial-gradient(circle at 10% 90%, rgba(15,81,50,0.04) 0%, transparent 40%), var(--bg-slide); }
+    .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 22px 40px; display: flex; flex-direction: column; justify-content: flex-start; opacity: 0; visibility: hidden; transform: translateX(45px); transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s; overflow-y: auto; }
+    .slide.active { opacity: 1; visibility: visible; transform: translateX(0); }
+    .slide.exit-left { opacity: 0; visibility: hidden; transform: translateX(-45px); }
 
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .btn-icon-top {
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
-      color: var(--text-main);
-      padding: 6px 12px;
-      border-radius: var(--radius-sm);
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s;
-    }
-    .btn-icon-top:hover {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-    }
-    .slide-badge-num {
-      background: var(--primary-light);
-      color: white;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
+    .slide-header { margin-bottom: 14px; flex-shrink: 0; }
+    .category-tag { display: inline-flex; align-items: center; gap: 6px; color: var(--primary); background: rgba(15, 81, 50, 0.08); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 10px; border-radius: 4px; margin-bottom: 6px; border-left: 3px solid var(--accent); }
+    .slide-h1 { font-family: var(--font-heading); font-size: 1.85rem; font-weight: 800; color: var(--primary-dark); line-height: 1.2; }
+    .slide-lead { font-size: 0.9rem; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
 
-    /* Slides Viewport */
-    .viewport {
-      flex: 1;
-      position: relative;
-      width: 100%;
-      height: calc(100% - 116px);
-      overflow: hidden;
-      background: radial-gradient(circle at 90% 10%, rgba(212,175,55,0.06) 0%, transparent 40%),
-                  radial-gradient(circle at 10% 90%, rgba(15,81,50,0.04) 0%, transparent 40%),
-                  var(--bg-slide);
-    }
-
-    .slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      padding: 22px 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateX(45px);
-      transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
-      overflow-y: auto;
-    }
-    .slide.active {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(0);
-    }
-    .slide.exit-left {
-      opacity: 0;
-      visibility: hidden;
-      transform: translateX(-45px);
-    }
-
-    /* Typography & Section Tags */
-    .slide-header {
-      margin-bottom: 14px;
-      flex-shrink: 0;
-    }
-    .category-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--primary);
-      background: rgba(15, 81, 50, 0.08);
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 4px 10px;
-      border-radius: 4px;
-      margin-bottom: 6px;
-      border-left: 3px solid var(--accent);
-    }
-    .slide-h1 {
-      font-family: var(--font-heading);
-      font-size: 1.85rem;
-      font-weight: 800;
-      color: var(--primary-dark);
-      line-height: 1.2;
-    }
-    .slide-lead {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-      line-height: 1.4;
-    }
-
-    /* Grid Layout Helpers */
     .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
     .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
 
-    /* Card System */
-    .card {
-      background: var(--bg-slide);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 18px;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.25s ease;
-      display: flex;
-      flex-direction: column;
-    }
-    .card:hover {
-      border-color: rgba(212, 175, 55, 0.6);
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
-    }
-    .card.primary-card {
-      border-top: 4px solid var(--primary);
-      background: linear-gradient(180deg, #ffffff 0%, #f7fcf9 100%);
-    }
-    .card.accent-card {
-      border-top: 4px solid var(--accent);
-      background: linear-gradient(180deg, #ffffff 0%, #fdfbf5 100%);
-    }
-    .card.cyan-card {
-      border-top: 4px solid var(--cyan-accent);
-      background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
-    }
+    .card { background: var(--bg-slide); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 18px; box-shadow: var(--shadow-sm); transition: all 0.25s ease; display: flex; flex-direction: column; }
+    .card:hover { border-color: rgba(212, 175, 55, 0.6); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .card.primary-card { border-top: 4px solid var(--primary); background: linear-gradient(180deg, #ffffff 0%, #f7fcf9 100%); }
+    .card.accent-card { border-top: 4px solid var(--accent); background: linear-gradient(180deg, #ffffff 0%, #fdfbf5 100%); }
+    .card.cyan-card { border-top: 4px solid var(--cyan-accent); background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%); }
 
-    .card-num {
-      font-size: 1.5rem;
-      font-weight: 800;
-      font-family: var(--font-heading);
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .card-title {
-      font-family: var(--font-heading);
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .card-desc {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-    .card-list {
-      list-style: none;
-      font-size: 0.82rem;
-      color: var(--text-main);
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-top: 6px;
-    }
-    .card-list li {
-      position: relative;
-      padding-left: 18px;
-      line-height: 1.4;
-    }
-    .card-list li::before {
-      content: "•";
-      position: absolute;
-      left: 4px;
-      color: var(--accent);
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
+    .card-num { font-size: 1.5rem; font-weight: 800; font-family: var(--font-heading); color: var(--accent); line-height: 1; margin-bottom: 6px; }
+    .card-title { font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+    .card-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; }
+    .card-list { list-style: none; font-size: 0.82rem; color: var(--text-main); display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+    .card-list li { position: relative; padding-left: 18px; line-height: 1.4; }
+    .card-list li::before { content: "•"; position: absolute; left: 4px; color: var(--accent); font-weight: bold; font-size: 1.1rem; }
 
-    /* Cover Slide Styling */
-    .cover-layout {
-      display: grid;
-      grid-template-columns: 1.25fr 0.75fr;
-      gap: 30px;
-      align-items: center;
-      height: 100%;
-    }
-    .cover-tagline {
-      display: inline-block;
-      background: rgba(212,175,55,0.15);
-      border: 1px solid rgba(212,175,55,0.4);
-      color: #8b6b15;
-      font-size: 0.8rem;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 30px;
-      margin-bottom: 12px;
-    }
-    .cover-heading {
-      font-family: var(--font-heading);
-      font-size: 2.3rem;
-      font-weight: 800;
-      color: var(--primary-dark);
-      line-height: 1.2;
-      margin-bottom: 10px;
-    }
-    .cover-heading span {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 60%, var(--accent) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .cover-sub {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      font-weight: 500;
-      margin-bottom: 22px;
-      line-height: 1.4;
-    }
-    .cover-presenter-card {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      background: #ffffff;
-      padding: 12px 18px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      border-left: 5px solid var(--accent);
-      box-shadow: var(--shadow-md);
-      width: fit-content;
-    }
-    .presenter-img {
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--accent);
-      box-shadow: var(--shadow-sm);
-    }
-    .presenter-name {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--primary-dark);
-    }
-    .presenter-title {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-    .cover-hero-box {
-      background: linear-gradient(135deg, #093320 0%, #0f5132 100%);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-      color: white;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      border: 2px solid rgba(212,175,55,0.3);
-      box-shadow: var(--shadow-lg);
-    }
-    .cover-bismillah {
-      font-family: 'Amiri', serif;
-      font-size: 1.5rem;
-      color: var(--accent);
-      margin-bottom: 12px;
-    }
-    .cover-badges-row {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 14px;
-    }
-    .badge-pill {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.25);
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
+    .cover-layout { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 30px; align-items: center; height: 100%; }
+    .cover-tagline { display: inline-block; background: rgba(212,175,55,0.15); border: 1px solid rgba(212,175,55,0.4); color: #8b6b15; font-size: 0.8rem; font-weight: 700; padding: 6px 14px; border-radius: 30px; margin-bottom: 12px; }
+    .cover-heading { font-family: var(--font-heading); font-size: 2.3rem; font-weight: 800; color: var(--primary-dark); line-height: 1.2; margin-bottom: 10px; }
+    .cover-heading span { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 60%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .cover-sub { font-size: 1.05rem; color: var(--text-muted); font-weight: 500; margin-bottom: 22px; line-height: 1.4; }
+    .cover-presenter-card { display: flex; align-items: center; gap: 16px; background: #ffffff; padding: 12px 18px; border-radius: var(--radius-md); border: 1px solid var(--border); border-left: 5px solid var(--accent); box-shadow: var(--shadow-md); width: fit-content; }
+    .presenter-img { width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); box-shadow: var(--shadow-sm); }
+    .presenter-name { font-family: var(--font-heading); font-weight: 700; font-size: 0.95rem; color: var(--primary-dark); }
+    .presenter-title { font-size: 0.78rem; color: var(--text-muted); }
+    .cover-hero-box { background: linear-gradient(135deg, #093320 0%, #0f5132 100%); border-radius: var(--radius-lg); padding: 24px; color: white; text-align: center; position: relative; overflow: hidden; border: 2px solid rgba(212,175,55,0.3); box-shadow: var(--shadow-lg); }
+    .cover-bismillah { font-family: 'Amiri', serif; font-size: 1.5rem; color: var(--accent); margin-bottom: 12px; }
+    .cover-badges-row { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+    .badge-pill { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
 
-    /* Interactive Ice Breaking & Poll */
-    .ice-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 6px;
-    }
-    .ice-card {
-      background: white;
-      border: 2px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 16px;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.2s;
-    }
-    .ice-card:hover {
-      border-color: var(--primary);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-sm);
-    }
-    .ice-card.selected {
-      border-color: var(--primary);
-      background: #f0fdf4;
-      box-shadow: 0 0 0 3px rgba(15, 81, 50, 0.2);
-    }
-    .ice-icon { font-size: 1.8rem; margin-bottom: 6px; }
-    .ice-name { font-weight: 700; font-size: 0.88rem; color: var(--primary-dark); }
-    .ice-votes { font-size: 0.75rem; color: var(--accent); font-weight: 700; margin-top: 4px; }
+    /* Polling Styles (Slide 2) */
+    .ice-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 6px; position: relative; }
+    .ice-card { background: white; border: 2px solid var(--border); border-radius: var(--radius-md); padding: 16px; cursor: pointer; text-align: center; transition: all 0.2s; position: relative; overflow: hidden; }
+    .ice-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .ice-card.selected { border-color: var(--primary); background: #f0fdf4; box-shadow: 0 0 0 3px rgba(15, 81, 50, 0.2); }
+    .ice-icon { font-size: 1.8rem; margin-bottom: 6px; position: relative; z-index: 2; }
+    .ice-name { font-weight: 700; font-size: 0.88rem; color: var(--primary-dark); position: relative; z-index: 2; }
+    .ice-votes { font-size: 0.8rem; color: var(--accent); font-weight: 800; margin-top: 6px; position: relative; z-index: 2; background: rgba(255,255,255,0.8); display: inline-block; padding: 2px 8px; border-radius: 10px; }
+    
+    /* Progress bar in poll card */
+    .poll-progress { position: absolute; bottom: 0; left: 0; height: 100%; background: rgba(212, 175, 55, 0.1); width: 0%; transition: width 0.5s ease-in-out; z-index: 1; border-top: 2px solid rgba(212, 175, 55, 0.3); }
+    .ice-card.selected .poll-progress { background: rgba(15, 81, 50, 0.1); border-top-color: var(--primary-light); }
 
-    /* Timeline & Roadmap Flow */
-    .timeline-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin: 20px 0;
-      position: relative;
-    }
-    .timeline-node {
-      flex: 1;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 14px 10px;
-      text-align: center;
-      position: relative;
-      transition: all 0.2s;
-    }
-    .timeline-node:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-    .timeline-step {
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: var(--accent);
-      text-transform: uppercase;
-    }
-    .timeline-title {
-      font-family: var(--font-heading);
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-      margin: 4px 0;
-    }
-    .timeline-arrow {
-      color: var(--accent);
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
+    .loading-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: 10; display: none; justify-content: center; align-items: center; border-radius: var(--radius-md); backdrop-filter: blur(2px); }
+    .spinner { width: 30px; height: 30px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .status-text { text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-top: 8px; font-weight: 500; }
 
-    /* Copyable Prompt Box */
-    .prompt-box {
-      background: #0f172a;
-      border: 1px solid #334155;
-      border-radius: var(--radius-md);
-      padding: 16px;
-      color: #e2e8f0;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.82rem;
-      line-height: 1.5;
-      position: relative;
-      max-height: 220px;
-      overflow-y: auto;
-      margin-top: 8px;
-    }
-    .btn-copy {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: var(--primary);
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      padding: 5px 12px;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      transition: all 0.2s;
-    }
-    .btn-copy:hover {
-      background: var(--primary-light);
-      color: #ffffff;
-    }
+    /* Other Styles... */
+    .timeline-wrap { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 20px 0; position: relative; }
+    .timeline-node { flex: 1; background: white; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px 10px; text-align: center; position: relative; transition: all 0.2s; }
+    .timeline-node:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .timeline-step { font-size: 0.72rem; font-weight: 800; color: var(--accent); text-transform: uppercase; }
+    .timeline-title { font-family: var(--font-heading); font-size: 0.9rem; font-weight: 700; color: var(--primary-dark); margin: 4px 0; }
+    .timeline-arrow { color: var(--accent); font-weight: bold; font-size: 1.2rem; }
 
-    /* Comparison Table / Box */
-    .comp-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .comp-card {
-      border-radius: var(--radius-md);
-      padding: 18px;
-      border: 1px solid var(--border);
-    }
-    .comp-card.bad {
-      background: #fff8f8;
-      border-color: #fecaca;
-    }
-    .comp-card.good {
-      background: #f0fdf4;
-      border-color: #bbf7d0;
-    }
+    .prompt-box { background: #0f172a; border: 1px solid #334155; border-radius: var(--radius-md); padding: 16px; color: #e2e8f0; font-family: 'Courier New', Courier, monospace; font-size: 0.82rem; line-height: 1.5; position: relative; max-height: 220px; overflow-y: auto; margin-top: 8px; }
+    .btn-copy { position: absolute; top: 10px; right: 10px; background: var(--primary); color: var(--accent); border: 1px solid var(--accent); padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s; }
+    .btn-copy:hover { background: var(--primary-light); color: #ffffff; }
 
-    .canvas-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 18px;
-      height: calc(100% - 65px);
-    }
-    .form-group-wrap {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 14px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      overflow-y: auto;
-      box-shadow: var(--shadow-sm);
-    }
-    .input-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .form-field {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-    .form-field label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .form-field input, .form-field select, .form-field textarea {
-      padding: 7px 10px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-family: inherit;
-      font-size: 0.78rem;
-      background: #ffffff;
-      color: var(--text-main);
-    }
-    .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(15,81,50,0.12);
-    }
-    .badge-optional {
-      font-size: 0.65rem;
-      color: var(--accent);
-      background: rgba(212,175,55,0.15);
-      padding: 1px 6px;
-      border-radius: 4px;
-      font-weight: 700;
-    }
-    .attachment-box-highlight {
-      background: #f0fdf4;
-      border: 1px dashed var(--primary);
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 0.73rem;
-      color: var(--primary-dark);
-      display: none;
-      line-height: 1.35;
-    }
-    .attachment-box-highlight.visible {
-      display: block;
-    }
-    .btn-gen {
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
-      color: white;
-      border: 1px solid var(--accent);
-      padding: 9px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 0.82rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 2px;
-      transition: all 0.2s;
-    }
-    .btn-gen:hover {
-      background: var(--primary-dark);
-      box-shadow: var(--shadow-sm);
-    }
+    .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .comp-card { border-radius: var(--radius-md); padding: 18px; border: 1px solid var(--border); }
+    .comp-card.bad { background: #fff8f8; border-color: #fecaca; }
+    .comp-card.good { background: #f0fdf4; border-color: #bbf7d0; }
 
-    /* Checklist Grid */
-    .check-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-    .check-item {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 10px 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.82rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .check-item.checked {
-      background: #f0fdf4;
-      border-color: var(--primary);
-      color: var(--primary-dark);
-    }
-    .check-box-square {
-      width: 18px;
-      height: 18px;
-      border-radius: 4px;
-      border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: bold;
-      color: white;
-    }
-    .check-item.checked .check-box-square {
-      background: var(--primary);
-      border-color: var(--primary);
-    }
+    .canvas-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 18px; height: calc(100% - 65px); }
+    .form-group-wrap { background: white; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px 18px; display: flex; flex-direction: column; gap: 9px; overflow-y: auto; box-shadow: var(--shadow-sm); }
+    .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .form-field { display: flex; flex-direction: column; gap: 3px; }
+    .form-field label { font-size: 0.7rem; font-weight: 700; color: var(--primary-dark); text-transform: uppercase; letter-spacing: 0.4px; display: flex; align-items: center; gap: 4px; }
+    .form-field input, .form-field select, .form-field textarea { padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; font-family: inherit; font-size: 0.78rem; background: #ffffff; color: var(--text-main); }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(15,81,50,0.12); }
+    .badge-optional { font-size: 0.65rem; color: var(--accent); background: rgba(212,175,55,0.15); padding: 1px 6px; border-radius: 4px; font-weight: 700; }
+    .attachment-box-highlight { background: #f0fdf4; border: 1px dashed var(--primary); padding: 8px 12px; border-radius: 6px; font-size: 0.73rem; color: var(--primary-dark); display: none; line-height: 1.35; }
+    .attachment-box-highlight.visible { display: block; }
+    .btn-gen { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; border: 1px solid var(--accent); padding: 9px; border-radius: 8px; font-weight: 700; font-size: 0.82rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 2px; transition: all 0.2s; }
+    .btn-gen:hover { background: var(--primary-dark); box-shadow: var(--shadow-sm); }
 
-    /* Bottom Control Bar */
-    .bottom-bar {
-      height: 56px;
-      background: #ffffff;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 36px;
-      z-index: 50;
-    }
-    .shortcut-hints {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .key-badge {
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-weight: 700;
-      color: var(--primary-dark);
-      font-size: 0.7rem;
-    }
-    .btn-nav-group {
-      display: flex;
-      gap: 10px;
-    }
-    .btn-nav {
-      background: white;
-      border: 1px solid var(--border);
-      color: var(--primary-dark);
-      padding: 7px 16px;
-      border-radius: var(--radius-sm);
-      font-size: 0.84rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s;
-    }
-    .btn-nav:hover {
-      background: var(--primary);
-      color: var(--accent);
-      border-color: var(--primary);
-    }
-    .btn-nav:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-      border-color: var(--border);
-      background: white;
-      color: var(--text-muted);
-    }
+    .check-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .check-item { background: white; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px; display: flex; align-items: center; gap: 10px; font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+    .check-item.checked { background: #f0fdf4; border-color: var(--primary); color: var(--primary-dark); }
+    .check-box-square { width: 18px; height: 18px; border-radius: 4px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; color: white; }
+    .check-item.checked .check-box-square { background: var(--primary); border-color: var(--primary); }
 
-    /* Overview Modal / Drawer */
-    .modal-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(9, 33, 23, 0.85);
-      backdrop-filter: blur(6px);
-      z-index: 200;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 30px;
-    }
-    .modal-card {
-      background: white;
-      border-radius: var(--radius-lg);
-      width: 100%;
-      max-width: 900px;
-      max-height: 85%;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      box-shadow: var(--shadow-lg);
-    }
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border);
-    }
-    .modal-grid-toc {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      overflow-y: auto;
-      padding-right: 6px;
-    }
-    .toc-item-btn {
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 10px;
-      font-size: 0.75rem;
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-family: var(--font-body);
-    }
-    .toc-item-btn:hover {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-    }
-    .toc-item-btn.active-toc {
-      border-color: var(--accent);
-      border-left: 4px solid var(--accent);
-      background: #f0fdf4;
-      font-weight: 700;
-    }
+    .bottom-bar { height: 56px; background: #ffffff; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; padding: 0 36px; z-index: 50; }
+    .shortcut-hints { font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; gap: 12px; }
+    .key-badge { background: var(--bg-subtle); border: 1px solid var(--border); padding: 2px 6px; border-radius: 4px; font-weight: 700; color: var(--primary-dark); font-size: 0.7rem; }
+    .btn-nav-group { display: flex; gap: 10px; }
+    .btn-nav { background: white; border: 1px solid var(--border); color: var(--primary-dark); padding: 7px 16px; border-radius: var(--radius-sm); font-size: 0.84rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
+    .btn-nav:hover { background: var(--primary); color: var(--accent); border-color: var(--primary); }
+    .btn-nav:disabled { opacity: 0.4; cursor: not-allowed; border-color: var(--border); background: white; color: var(--text-muted); }
 
-    /* Toast Notification */
-    .toast {
-      position: absolute;
-      bottom: 70px;
-      right: 36px;
-      background: #0f172a;
-      color: #38bdf8;
-      border: 1px solid #38bdf8;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      box-shadow: var(--shadow-lg);
-      display: none;
-      z-index: 300;
-      animation: fadeIn 0.2s ease;
-    }
+    .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(9, 33, 23, 0.85); backdrop-filter: blur(6px); z-index: 200; display: none; align-items: center; justify-content: center; padding: 30px; }
+    .modal-card { background: white; border-radius: var(--radius-lg); width: 100%; max-width: 900px; max-height: 85%; padding: 24px; display: flex; flex-direction: column; box-shadow: var(--shadow-lg); }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .modal-grid-toc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; overflow-y: auto; padding-right: 6px; }
+    .toc-item-btn { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px; font-size: 0.75rem; text-align: left; cursor: pointer; transition: all 0.2s; font-family: var(--font-body); }
+    .toc-item-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+    .toc-item-btn.active-toc { border-color: var(--accent); border-left: 4px solid var(--accent); background: #f0fdf4; font-weight: 700; }
+
+    .toast { position: absolute; bottom: 70px; right: 36px; background: #0f172a; color: #38bdf8; border: 1px solid #38bdf8; padding: 10px 18px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; box-shadow: var(--shadow-lg); display: none; z-index: 300; animation: fadeIn 0.2s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
@@ -818,111 +181,111 @@
 
   <div class="deck-container" id="deckContainer">
     
-    <!-- Top Animated Progress Bar -->
-    <div class="top-progress-wrap">
-      <div class="top-progress-bar" id="progressBar"></div>
-    </div>
+    <div class="top-progress-wrap"><div class="top-progress-bar" id="progressBar"></div></div>
 
-    <!-- Top Navigation Header -->
     <header class="navbar">
       <div class="brand-group">
         <span class="badge-kemenag">KANWIL KEMENAG PROVINSI GORONTALO</span>
         <span class="topic-title">Pelatihan Pembuatan MPI Berbasis AI • Madrasah Mandiri Berprestasi</span>
       </div>
       <div class="nav-actions">
-        <button class="btn-icon-top" onclick="toggleOverviewModal()" title="Lihat Daftar Slide">
-          📋 Daftar Slide
-        </button>
-        <button class="btn-icon-top" onclick="toggleFullscreen()" title="Layar Penuh">
-          ⛶ Layar Penuh
-        </button>
+        <button class="btn-icon-top" onclick="toggleOverviewModal()" title="Lihat Daftar Slide">📋 Daftar Slide</button>
+        <button class="btn-icon-top" onclick="toggleFullscreen()" title="Layar Penuh">⛶ Layar Penuh</button>
         <span class="slide-badge-num" id="slideIndicator">Slide 1 / 32</span>
       </div>
     </header>
 
-    <!-- Slide Viewport (All 32 Slides) -->
     <main class="viewport">
 
-      <!-- ==================== COVER & ICE BREAKING ==================== -->
       <!-- SLIDE 1: COVER -->
       <section class="slide active" data-slide="1">
         <div class="cover-layout">
           <div>
-            <span class="cover-tagline">🚀 Tim Pengembang Literasi Provinsi Gorontalo • Literasi Digital 4.0</span>
+            <span class="cover-tagline">🚀 Kanwil Kemenag Provinsi Gorontalo • Literasi Digital 4.0</span>
             <h1 class="cover-heading">Pembuatan Media Pembelajaran Interaktif (MPI) <span>Berbasis AI</span></h1>
             <p class="cover-sub">Dari Ide, Prompt, Generate, Iterasi hingga Publikasi untuk Guru MI, MTs, dan MA</p>
-            
             <div class="cover-presenter-card">
               <img src="https://iili.io/CSAHRQ1.png" alt="Rahmat Djafar, S.Pd., Gr" class="presenter-img" onerror="this.src='https://placehold.co/100x100/0F5132/D4AF37?text=RD'">
               <div>
                 <div class="presenter-name">Rahmat Djafar, S.Pd., Gr.</div>
-                <div class="presenter-title">Guru Matematika SMA Islam Terpadu Al Ishlah & Kreator Media Pembelajaran Digital Ruang Murid</div>
+                <div class="presenter-title">Instruktur & Fasilitator Media Digital • Kanwil Kemenag Prov. Gorontalo</div>
               </div>
             </div>
           </div>
-
           <div class="cover-hero-box">
             <div class="cover-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
             <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 8px; color: var(--accent);">Transformasi Digital Madrasah Gorontalo</h3>
             <p style="font-size: 0.8rem; line-height: 1.5; opacity: 0.9;">"Guru tidak harus menjadi programmer untuk menciptakan media pembelajaran interaktif berkualitas tinggi."</p>
             <div class="cover-badges-row">
-              <span class="badge-pill">🎒 MI</span>
-              <span class="badge-pill">🏫 MTs</span>
-              <span class="badge-pill">🎓 MA</span>
-              <span class="badge-pill">⚡ AI Assisted</span>
+              <span class="badge-pill">🎒 MI</span><span class="badge-pill">🏫 MTs</span><span class="badge-pill">🎓 MA</span><span class="badge-pill">⚡ AI Assisted</span>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: ICE BREAKING & POLLING -->
+      <!-- SLIDE 2: ICE BREAKING & POLLING (REAL-TIME DB) -->
       <section class="slide" data-slide="2">
         <div class="slide-header">
           <span class="category-tag">Aktivitas Pembuka</span>
           <h2 class="slide-h1">Jika AI Bisa Membantu Membuat Media dalam Menit, Apa Pilihan Anda?</h2>
-          <p class="slide-lead">Klik kartu di bawah untuk memberikan aspirasi jenis media pembelajaran yang paling ingin Bapak/Ibu kembangkan hari ini:</p>
+          <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+            <p class="slide-lead">Klik kartu di bawah untuk memberikan aspirasi jenis media pembelajaran yang paling ingin Bapak/Ibu kembangkan hari ini:</p>
+            <button onclick="fetchVotes()" class="btn-copy" style="position: static; margin-bottom: 4px; padding: 6px 12px;">🔄 Perbarui Data</button>
+          </div>
         </div>
 
+        <div class="status-text" id="dbStatus">Memuat data dari server...</div>
+
         <div class="ice-grid" id="iceGrid">
+          <div class="loading-overlay" id="loadingOverlay"><div class="spinner"></div></div>
+          
           <div class="ice-card" onclick="castVote(0, this)">
+            <div class="poll-progress" id="prog-0"></div>
             <div class="ice-icon">🎮</div>
             <div class="ice-name">Gim Edukasi</div>
-            <div class="ice-votes" id="vote-0">28 Peminat</div>
+            <div class="ice-votes" id="vote-0">0 Peminat</div>
           </div>
           <div class="ice-card" onclick="castVote(1, this)">
+            <div class="poll-progress" id="prog-1"></div>
             <div class="ice-icon">🧪</div>
             <div class="ice-name">Lab Maya / Simulasi</div>
-            <div class="ice-votes" id="vote-1">34 Peminat</div>
+            <div class="ice-votes" id="vote-1">0 Peminat</div>
           </div>
           <div class="ice-card" onclick="castVote(2, this)">
+            <div class="poll-progress" id="prog-2"></div>
             <div class="ice-icon">📝</div>
             <div class="ice-name">Kuis Interaktif Cerdas</div>
-            <div class="ice-votes" id="vote-2">42 Peminat</div>
+            <div class="ice-votes" id="vote-2">0 Peminat</div>
           </div>
           <div class="ice-card" onclick="castVote(3, this)">
+            <div class="poll-progress" id="prog-3"></div>
             <div class="ice-icon">🤖</div>
             <div class="ice-name">Chatbot Pembelajaran</div>
-            <div class="ice-votes" id="vote-3">19 Peminat</div>
+            <div class="ice-votes" id="vote-3">0 Peminat</div>
           </div>
           <div class="ice-card" onclick="castVote(4, this)">
+            <div class="poll-progress" id="prog-4"></div>
             <div class="ice-icon">📊</div>
             <div class="ice-name">LKPD Digital Interaktif</div>
-            <div class="ice-votes" id="vote-4">25 Peminat</div>
+            <div class="ice-votes" id="vote-4">0 Peminat</div>
           </div>
           <div class="ice-card" onclick="castVote(5, this)">
+            <div class="poll-progress" id="prog-5"></div>
             <div class="ice-icon">💡</div>
             <div class="ice-name">MPI Eksplorasi Konsep</div>
-            <div class="ice-votes" id="vote-5">38 Peminat</div>
+            <div class="ice-votes" id="vote-5">0 Peminat</div>
           </div>
           <div class="ice-card" onclick="castVote(6, this)">
+            <div class="poll-progress" id="prog-6"></div>
             <div class="ice-icon">🧩</div>
             <div class="ice-name">Puzzle Mufradat / Istilah</div>
-            <div class="ice-votes" id="vote-6">21 Peminat</div>
+            <div class="ice-votes" id="vote-6">0 Peminat</div>
           </div>
           <div class="ice-card" onclick="castVote(7, this)">
+            <div class="poll-progress" id="prog-7"></div>
             <div class="ice-icon">✨</div>
             <div class="ice-name">Flashcard Cerdas</div>
-            <div class="ice-votes" id="vote-7">16 Peminat</div>
+            <div class="ice-votes" id="vote-7">0 Peminat</div>
           </div>
         </div>
       </section>
@@ -934,55 +297,17 @@
           <h2 class="slide-h1">Roadmap Pelatihan: Dari Gagasan ke Hasil Nyata</h2>
           <p class="slide-lead">Tujuh tahapan sistematis untuk menghasilkan media pembelajaran mandiri berkualitas.</p>
         </div>
-
         <div class="timeline-wrap">
-          <div class="timeline-node">
-            <span class="timeline-step">Langkah 1</span>
-            <h4 class="timeline-title">💡 IDE</h4>
-            <p class="card-desc">Tujuan & Analisis Masalah</p>
-          </div>
-          <span class="timeline-arrow">➔</span>
-          <div class="timeline-node">
-            <span class="timeline-step">Langkah 2</span>
-            <h4 class="timeline-title">🎨 DESAIN</h4>
-            <p class="card-desc">Alur & Interaktivitas</p>
-          </div>
-          <span class="timeline-arrow">➔</span>
-          <div class="timeline-node">
-            <span class="timeline-step">Langkah 3</span>
-            <h4 class="timeline-title">📝 PROMPT</h4>
-            <p class="card-desc">Struktur Perintah AI</p>
-          </div>
-          <span class="timeline-arrow">➔</span>
-          <div class="timeline-node">
-            <span class="timeline-step">Langkah 4</span>
-            <h4 class="timeline-title">⚡ GENERATE</h4>
-            <p class="card-desc">Pembuatan Kode HTML</p>
-          </div>
-          <span class="timeline-arrow">➔</span>
-          <div class="timeline-node">
-            <span class="timeline-step">Langkah 5</span>
-            <h4 class="timeline-title">🔄 ITERASI</h4>
-            <p class="card-desc">Revisi & Penyempurnaan</p>
-          </div>
-          <span class="timeline-arrow">➔</span>
-          <div class="timeline-node">
-            <span class="timeline-step">Langkah 6</span>
-            <h4 class="timeline-title">🔍 UJI</h4>
-            <p class="card-desc">Validasi 4 Lapis</p>
-          </div>
-          <span class="timeline-arrow">➔</span>
-          <div class="timeline-node">
-            <span class="timeline-step">Langkah 7</span>
-            <h4 class="timeline-title">🚀 PUBLIKASI</h4>
-            <p class="card-desc">Offline / Online / Hybrid</p>
-          </div>
+          <div class="timeline-node"><span class="timeline-step">Langkah 1</span><h4 class="timeline-title">💡 IDE</h4><p class="card-desc">Tujuan & Masalah</p></div><span class="timeline-arrow">➔</span>
+          <div class="timeline-node"><span class="timeline-step">Langkah 2</span><h4 class="timeline-title">🎨 DESAIN</h4><p class="card-desc">Alur & Interaksi</p></div><span class="timeline-arrow">➔</span>
+          <div class="timeline-node"><span class="timeline-step">Langkah 3</span><h4 class="timeline-title">📝 PROMPT</h4><p class="card-desc">Struktur Perintah</p></div><span class="timeline-arrow">➔</span>
+          <div class="timeline-node"><span class="timeline-step">Langkah 4</span><h4 class="timeline-title">⚡ GENERATE</h4><p class="card-desc">Pembuatan Kode</p></div><span class="timeline-arrow">➔</span>
+          <div class="timeline-node"><span class="timeline-step">Langkah 5</span><h4 class="timeline-title">🔄 ITERASI</h4><p class="card-desc">Penyempurnaan</p></div><span class="timeline-arrow">➔</span>
+          <div class="timeline-node"><span class="timeline-step">Langkah 6</span><h4 class="timeline-title">🔍 UJI</h4><p class="card-desc">Validasi Lapis</p></div><span class="timeline-arrow">➔</span>
+          <div class="timeline-node"><span class="timeline-step">Langkah 7</span><h4 class="timeline-title">🚀 PUBLIKASI</h4><p class="card-desc">Offline / Online</p></div>
         </div>
-
         <div class="card accent-card" style="padding: 12px 18px;">
-          <p style="font-size: 0.84rem; color: var(--primary-dark); font-weight: 600;">
-            🌟 <b>Prinsip Utama:</b> Guru bertindak sebagai <i>Master Architect</i> (perancang pedagogis), sedangkan AI bertindak sebagai <i>Technical Builder</i> (pembuat kode).
-          </p>
+          <p style="font-size: 0.84rem; color: var(--primary-dark); font-weight: 600;">🌟 <b>Prinsip Utama:</b> Guru bertindak sebagai <i>Master Architect</i> (perancang pedagogis), sedangkan AI bertindak sebagai <i>Technical Builder</i> (pembuat kode).</p>
         </div>
       </section>
 
@@ -1829,7 +1154,7 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
 
         <div class="card accent-card" style="margin-top: 14px; padding: 12px 18px;">
           <p style="font-size: 0.84rem; color: var(--primary-dark); font-weight: 600;">
-            🛡️ <b>Prinsip Etika AI:</b> "AI Menghasilkan (Generate), Guru Memvalidasi (Validate)". AI bukan sumber kebenaran mutlak; tanggung jawab kebenaran materi tetap berada di tangan guru.
+            🛡️️ <b>Prinsip Etika AI:</b> "AI Menghasilkan (Generate), Guru Memvalidasi (Validate)". AI bukan sumber kebenaran mutlak; tanggung jawab kebenaran materi tetap berada di tangan guru.
           </p>
         </div>
       </section>
@@ -1863,7 +1188,6 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
         </div>
       </section>
 
-      <!-- ==================== BAGIAN 10: PRAKTIK & WORKSHOP ==================== -->
       <!-- SLIDE 30: TANTANGAN PRAKTIK -->
       <section class="slide" data-slide="30">
         <div class="slide-header">
@@ -1897,7 +1221,7 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
         </div>
       </section>
 
-      <!-- SLIDE 31: CANVAS GENERATOR PROMPT PRAKTIK INTERAKTIF (REVISED) -->
+      <!-- SLIDE 31: CANVAS GENERATOR PROMPT PRAKTIK INTERAKTIF -->
       <section class="slide" data-slide="31">
         <div class="slide-header">
           <span class="category-tag">Bagian 10: Praktik Mandiri • Kanwil Kemenag Prov. Gorontalo</span>
@@ -1906,7 +1230,6 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
         </div>
 
         <div class="canvas-grid">
-          <!-- Form Input Kolom Tambahan Sesuai Revisi -->
           <div class="form-group-wrap">
             <div class="input-row">
               <div class="form-field">
@@ -1939,7 +1262,6 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
               </div>
             </div>
 
-            <!-- REVISI POINT 1: Karakter Murid & Kondisi Geografis Madrasah -->
             <div class="input-row">
               <div class="form-field">
                 <label>Karakter Murid <span class="badge-optional">Profil Siswa</span></label>
@@ -1971,7 +1293,6 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
               <input type="text" id="canvasTujuan" value="Murid dapat memanipulasi suhu dan melihat proses evaporasi hingga hujan secara langsung" placeholder="Capaian target kemampuan murid">
             </div>
 
-            <!-- REVISI POINT 1: Pilihan Melampirkan Soal & Materi Mandiri -->
             <div class="form-field">
               <label>Lampiran Dokumen Materi / Soal Mandiri</label>
               <select id="canvasLampiran" onchange="toggleAttachmentInfo()">
@@ -1984,7 +1305,6 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
               📎 <b>Mode Lampirkan File Aktif:</b> Prompt akan mencantumkan instruksi bahwa Anda menyertakan file materi/soal (PDF/Word/Teks) bersamaan saat mengirimkan perintah ini ke AI (Gemini / ChatGPT / Claude).
             </div>
 
-            <!-- REVISI POINT 1: Kolom Deskripsi Tampilan / Desain Visual -->
             <div class="form-field">
               <label>Deskripsi Tampilan & Preferensi Visual <span class="badge-optional">UI/UX</span></label>
               <textarea id="canvasTampilan" rows="2" placeholder="Deskripsikan tampilan: misalnya warna hijau toska dan emas, gaya kartu minimalis, tombol besar ramah smartphone, ada animasi transisi halus, tata letak dashboard modern..."></textarea>
@@ -1995,7 +1315,6 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
             </button>
           </div>
 
-          <!-- Output Prompt Box -->
           <div style="display: flex; flex-direction: column; background: #0f172a; border-radius: var(--radius-md); padding: 14px; position: relative; border: 1px solid #334155;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
               <span style="font-size: 0.75rem; color: var(--accent); font-weight: 700; letter-spacing: 0.5px;">PROMPT SIAP SALIN KE AI:</span>
@@ -2006,15 +1325,13 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
         </div>
       </section>
 
-      <!-- SLIDE 32: PENUTUP & KATA BIJAK -->
+      <!-- SLIDE 32: PENUTUP -->
       <section class="slide" data-slide="32">
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 0 40px;">
           <span class="cover-tagline">🌟 Kantor Wilayah Kementerian Agama Provinsi Gorontalo</span>
-          
           <h2 style="font-family: var(--font-heading); font-size: 1.85rem; color: var(--primary-dark); margin: 8px 0 14px; max-width: 900px; line-height: 1.3;">
             "Guru Tidak Harus Menjadi Programmer untuk Menciptakan Pembelajaran Digital yang Bermakna."
           </h2>
-
           <div class="card accent-card" style="max-width: 800px; padding: 16px 24px; margin-bottom: 20px;">
             <p style="font-size: 0.95rem; color: var(--primary-dark); font-weight: 600; line-height: 1.6;">
               Mulai dari tantangan kontekstual di madrasah Gorontalo.<br>
@@ -2022,7 +1339,6 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
               Gunakan AI sebagai mitra cerdas untuk mewujudkan media berkualitas mandiri.
             </p>
           </div>
-
           <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
             <img src="https://iili.io/CSAHRQ1.png" alt="Rahmat Djafar, S.Pd., Gr" class="presenter-img" style="width: 50px; height: 50px;" onerror="this.src='https://placehold.co/100x100/0F5132/D4AF37?text=RD'">
             <div style="text-align: left;">
@@ -2030,7 +1346,6 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
               <div style="font-size: 0.75rem; color: var(--text-muted);">GURU SMA ISLAM TERPADU AL ISHLAH GORONTALO • FASILITATOR LITERASI DIGITAL MADRASAH GORONTALO</div>
             </div>
           </div>
-
           <div style="font-size: 0.78rem; color: var(--text-muted);">
             Roadmap Sukses: <b>IDE ➔ PROMPT ➔ GENERATE ➔ ITERASI ➔ UJI ➔ PUBLIKASI</b>
           </div>
@@ -2039,7 +1354,6 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
 
     </main>
 
-    <!-- Bottom Controls -->
     <footer class="bottom-bar">
       <div class="shortcut-hints">
         <span>Gunakan Keyboard:</span>
@@ -2047,109 +1361,65 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
         <span><kbd class="key-badge">→</kbd> / <kbd class="key-badge">Spasi</kbd> Selanjutnya</span>
         <span><kbd class="key-badge">Home</kbd> / <kbd class="key-badge">End</kbd></span>
       </div>
-
       <div class="btn-nav-group">
-        <button class="btn-nav" id="btnPrev" onclick="navigateSlide(-1)" disabled>
-          ◀ Sebelumnya
-        </button>
-        <button class="btn-nav" id="btnNext" onclick="navigateSlide(1)">
-          Selanjutnya ▶
-        </button>
+        <button class="btn-nav" id="btnPrev" onclick="navigateSlide(-1)" disabled>◀ Sebelumnya</button>
+        <button class="btn-nav" id="btnNext" onclick="navigateSlide(1)">Selanjutnya ▶</button>
       </div>
     </footer>
 
-    <!-- Slide Overview Modal -->
     <div class="modal-overlay" id="overviewModal" onclick="closeOverviewIfOutside(event)">
       <div class="modal-card">
         <div class="modal-header">
           <h3 style="font-family: var(--font-heading); color: var(--primary-dark); font-size: 1.1rem;">📑 Indeks 32 Slide Presentasi • Kanwil Kemenag Prov. Gorontalo</h3>
           <button class="btn-icon-top" onclick="toggleOverviewModal()">Tutup ✕</button>
         </div>
-        <div class="modal-grid-toc" id="tocGrid">
-          <!-- Populated by JS -->
-        </div>
+        <div class="modal-grid-toc" id="tocGrid"></div>
       </div>
     </div>
 
-    <!-- Notification Toast -->
     <div class="toast" id="toastMessage">Teks berhasil disalin ke clipboard!</div>
 
   </div>
 
   <script>
-    // State Variables
+    // --- NAVIGASI SLIDE ---
     let currentSlide = 1;
-    const totalSlides = 32;
-
-    // Titles List for TOC Index
+    const totalSlides = 32; 
     const slideTitles = [
-      "1. Cover & Identitas Pelatihan Gorontalo",
-      "2. Ice Breaking & Poling Peminatan",
-      "3. Roadmap Perjalanan 7 Langkah",
-      "4. 10 Capaian Hasil Belajar",
-      "5. Tantangan Pembelajaran Madrasah",
-      "6. Media Statis vs Interaktif",
-      "7. Hakikat Interaktivitas Pedagogis",
-      "8. Definisi Konsep MPI",
-      "9. 7 Kriteria MPI Berkualitas",
-      "10. Waspada Interaksi Semu",
-      "11. 5 Varian Media Interaktif",
-      "12. Contoh Relevan Jenjang MI",
-      "13. Contoh Relevan Jenjang MTs",
-      "14. Contoh Relevan Jenjang MA",
-      "15. Sinergi Guru & AI Co-Creator",
-      "16. Ekosistem Alat AI Generatif",
-      "17. 3 Model: Offline, Online, Hybrid",
-      "18. Panduan Memilih Offline",
-      "19. Panduan Memilih Online",
-      "20. Solusi Hybrid & Golden Rule",
-      "21. Prompt Umum vs Terstruktur",
-      "22. Anatomi 9 Formula Prompt",
-      "23. Template Master Prompt MPI",
-      "24. 7 Langkah Alur Kerja Pembuatan",
-      "25. Siklus Iterasi Berkelanjutan",
-      "26. Bank Prompt Iterasi Perbaikan",
-      "27. Checklist Uji Pra-Kelas",
-      "28. Validasi 4 Lapis & Etika AI",
-      "29. Jalur Publikasi Offline & Online",
-      "30. SOP & Tantangan Praktik Guru",
-      "31. Interactive Canvas Generator (Revised)",
-      "32. Penutup & Refleksi Bermakna"
+      "1. Cover & Identitas Pelatihan Gorontalo", "2. Ice Breaking & Poling Peminatan", "3. Roadmap Perjalanan 7 Langkah",
+      "4. 10 Capaian Hasil Belajar", "5. Tantangan Pembelajaran Madrasah", "6. Media Statis vs Interaktif",
+      "7. Hakikat Interaktivitas Pedagogis", "8. Definisi Konsep MPI", "9. 7 Kriteria MPI Berkualitas",
+      "10. Waspada Interaksi Semu", "11. 5 Varian Media Interaktif", "12. Contoh Relevan Jenjang MI",
+      "13. Contoh Relevan Jenjang MTs", "14. Contoh Relevan Jenjang MA", "15. Sinergi Guru & AI Co-Creator",
+      "16. Ekosistem Alat AI Generatif", "17. 3 Model: Offline, Online, Hybrid", "18. Panduan Memilih Offline",
+      "19. Panduan Memilih Online", "20. Solusi Hybrid & Golden Rule", "21. Prompt Umum vs Terstruktur",
+      "22. Anatomi 9 Formula Prompt", "23. Template Master Prompt MPI", "24. 7 Langkah Alur Kerja Pembuatan",
+      "25. Siklus Iterasi Berkelanjutan", "26. Bank Prompt Iterasi Perbaikan", "27. Checklist Uji Pra-Kelas",
+      "28. Validasi 4 Lapis & Etika AI", "29. Jalur Publikasi Offline & Online", "30. SOP & Tantangan Praktik Guru",
+      "31. Interactive Canvas Generator", "32. Penutup & Refleksi Bermakna"
     ];
 
-    // Initialize View
     function updateSlideView() {
       const slides = document.querySelectorAll('.slide');
       slides.forEach((slide) => {
         const idx = parseInt(slide.getAttribute('data-slide'));
         slide.classList.remove('active', 'exit-left');
-
-        if (idx === currentSlide) {
-          slide.classList.add('active');
-        } else if (idx < currentSlide) {
-          slide.classList.add('exit-left');
-        }
+        if (idx === currentSlide) slide.classList.add('active');
+        else if (idx < currentSlide) slide.classList.add('exit-left');
       });
 
-      // Update Indicators
       document.getElementById('slideIndicator').innerText = `Slide ${currentSlide} / ${totalSlides}`;
-      const progressPercent = (currentSlide / totalSlides) * 100;
-      document.getElementById('progressBar').style.width = `${progressPercent}%`;
-
-      // Button State
+      document.getElementById('progressBar').style.width = `${(currentSlide / totalSlides) * 100}%`;
       document.getElementById('btnPrev').disabled = currentSlide === 1;
       document.getElementById('btnNext').disabled = currentSlide === totalSlides;
-
-      // Update TOC Active
+      
       updateTocActive();
+      if(currentSlide === 2) fetchVotes(); // Auto fetch if on slide 2
     }
 
-    function navigateSlide(direction) {
-      const target = currentSlide + direction;
-      if (target >= 1 && target <= totalSlides) {
-        currentSlide = target;
-        updateSlideView();
-      }
+    function navigateSlide(dir) {
+      const target = currentSlide + dir;
+      if (target >= 1 && target <= totalSlides) { currentSlide = target; updateSlideView(); }
     }
 
     function goToSlide(slideNum) {
@@ -2159,34 +1429,22 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
         toggleOverviewModal(false);
       }
     }
-
-    // Keyboard Shortcuts
+    
     window.addEventListener('keydown', (e) => {
-      // Ignore if user is currently typing in an input or textarea
-      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) {
-        return;
-      }
-
-      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
-        e.preventDefault();
-        navigateSlide(1);
-      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-        e.preventDefault();
-        navigateSlide(-1);
-      } else if (e.key === 'Home') {
-        e.preventDefault();
-        goToSlide(1);
-      } else if (e.key === 'End') {
-        e.preventDefault();
-        goToSlide(totalSlides);
-      } else if (e.key.toLowerCase() === 'f') {
-        toggleFullscreen();
-      } else if (e.key.toLowerCase() === 'o') {
-        toggleOverviewModal();
-      }
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); navigateSlide(1); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); navigateSlide(-1); }
+      else if (e.key === 'Home') { e.preventDefault(); goToSlide(1); }
+      else if (e.key === 'End') { e.preventDefault(); goToSlide(totalSlides); }
+      else if (e.key.toLowerCase() === 'f') { toggleFullscreen(); }
+      else if (e.key.toLowerCase() === 'o') { toggleOverviewModal(); }
     });
 
-    // Overview Table of Contents
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+      else if (document.exitFullscreen) document.exitFullscreen();
+    }
+
     function buildTocGrid() {
       const container = document.getElementById('tocGrid');
       container.innerHTML = '';
@@ -2203,11 +1461,8 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
     function updateTocActive() {
       const buttons = document.querySelectorAll('.toc-item-btn');
       buttons.forEach((btn, idx) => {
-        if (idx + 1 === currentSlide) {
-          btn.classList.add('active-toc');
-        } else {
-          btn.classList.remove('active-toc');
-        }
+        if (idx + 1 === currentSlide) btn.classList.add('active-toc');
+        else btn.classList.remove('active-toc');
       });
     }
 
@@ -2215,34 +1470,14 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
       const modal = document.getElementById('overviewModal');
       const shouldOpen = forceState !== undefined ? forceState : modal.style.display !== 'flex';
       modal.style.display = shouldOpen ? 'flex' : 'none';
-      if (shouldOpen) buildTocGrid();
+      if(shouldOpen) buildTocGrid();
     }
+    function closeOverviewIfOutside(e) { if (e.target.id === 'overviewModal') toggleOverviewModal(false); }
 
-    function closeOverviewIfOutside(e) {
-      if (e.target.id === 'overviewModal') {
-        toggleOverviewModal(false);
-      }
-    }
-
-    // Fullscreen Toggle
-    function toggleFullscreen() {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        }
-      }
-    }
-
-    // Toast Notification & Safe Clipboard Copy
     function showToast(msg = 'Teks berhasil disalin!') {
       const toast = document.getElementById('toastMessage');
-      toast.innerText = msg;
-      toast.style.display = 'block';
-      setTimeout(() => {
-        toast.style.display = 'none';
-      }, 2500);
+      toast.innerText = msg; toast.style.display = 'block';
+      setTimeout(() => toast.style.display = 'none', 3000);
     }
 
     function copyText(text) {
@@ -2250,12 +1485,8 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
       textarea.value = text;
       document.body.appendChild(textarea);
       textarea.select();
-      try {
-        document.execCommand('copy');
-        showToast('Teks berhasil disalin!');
-      } catch (err) {
-        showToast('Gagal menyalin otomatis');
-      }
+      try { document.execCommand('copy'); showToast('Teks berhasil disalin!'); } 
+      catch (err) { showToast('Gagal menyalin otomatis'); }
       document.body.removeChild(textarea);
     }
 
@@ -2265,34 +1496,113 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
       copyText(textToCopy);
     }
 
-    // Interactive Poll on Slide 2
-    let votes = [28, 34, 42, 19, 25, 38, 21, 16];
-    function castVote(index, element) {
-      votes[index]++;
-      document.getElementById(`vote-${index}`).innerText = `${votes[index]} Peminat`;
-      
-      const cards = document.querySelectorAll('.ice-card');
-      cards.forEach(c => c.classList.remove('selected'));
-      element.classList.add('selected');
-      showToast('Pilihan Anda tercatat di sesi pelatihan Gorontalo!');
-    }
+    function toggleCheck(element) { element.classList.toggle('checked'); }
 
-    // Checklist on Slide 27
-    function toggleCheck(element) {
-      element.classList.toggle('checked');
-    }
+    // --- LOGIKA POLLING REAL-TIME (GOOGLE APPS SCRIPT) ---
+    /**
+     * GANTI URL INI DENGAN URL WEB APP GOOGLE APPS SCRIPT ANDA
+     * dari proses Deploy kode.gs
+     */
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwxsqNS2ReAlpcDmRIbj4Hg3iMYZPjkXkDkBofP1J14WLbBodFmdpqEbkhlmsYhRo95CQ/exec'; // <-- UBAH INI
 
-    function toggleAttachmentInfo() {
-      const lampiranSelect = document.getElementById('canvasLampiran').value;
-      const noticeBox = document.getElementById('attachmentNoticeBox');
-      if (lampiranSelect === 'ya') {
-        noticeBox.classList.add('visible');
-      } else {
-        noticeBox.classList.remove('visible');
+    let votesData = [0, 0, 0, 0, 0, 0, 0, 0];
+    let hasVoted = false; 
+
+    function updatePollUI(votesArray) {
+      const maxVotes = Math.max(...votesArray, 1); 
+      for(let i = 0; i < votesArray.length; i++) {
+        const count = votesArray[i];
+        const percent = (count / maxVotes) * 100;
+        document.getElementById(`vote-${i}`).innerText = `${count} Peminat`;
+        document.getElementById(`prog-${i}`).style.width = `${percent}%`;
       }
     }
 
-    // Interactive Practice Canvas on Slide 31 (Revised with new fields)
+    async function fetchVotes() {
+      if (SCRIPT_URL.includes('AKfycbz_XXXXXXXXXXXX')) {
+         document.getElementById('dbStatus').innerText = "⚠️ URL Web App belum disetel. (Simulasi Offline)";
+         document.getElementById('dbStatus').style.color = "#D4AF37";
+         return;
+      }
+      document.getElementById('dbStatus').innerText = "Memuat data terbaru...";
+      document.getElementById('loadingOverlay').style.display = 'flex';
+      
+      try {
+        const response = await fetch(SCRIPT_URL + "?action=getVotes");
+        const result = await response.json();
+        
+        if (result.status === 'success') {
+          votesData = result.data;
+          updatePollUI(votesData);
+          document.getElementById('dbStatus').innerText = "Data terhubung Real-time dengan Spreadsheet 🟢";
+          document.getElementById('dbStatus').style.color = "var(--primary)";
+        } else {
+           document.getElementById('dbStatus').innerText = "Gagal memuat data: " + result.message;
+        }
+      } catch (error) {
+        document.getElementById('dbStatus').innerText = "Koneksi terputus. Menampilkan data lokal sementara.";
+      } finally {
+        document.getElementById('loadingOverlay').style.display = 'none';
+      }
+    }
+
+    async function castVote(index, element) {
+      if (hasVoted) {
+        showToast("Anda sudah memberikan aspirasi pada sesi ini.");
+        return;
+      }
+      
+      if (SCRIPT_URL.includes('AKfycbz_XXXXXXXXXXXX')) {
+         votesData[index]++;
+         updatePollUI(votesData);
+         highlightCard(element);
+         showToast("URL Web App belum diatur! Simulasi vote lokal berhasil.");
+         hasVoted = true;
+         return;
+      }
+
+      document.getElementById('loadingOverlay').style.display = 'flex';
+      document.getElementById('dbStatus').innerText = "Menyimpan pilihan Anda...";
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ voteIndex: index })
+        });
+        
+        const result = await response.json();
+        if (result.status === 'success') {
+          votesData = result.data;
+          updatePollUI(votesData);
+          highlightCard(element);
+          hasVoted = true;
+          showToast('Pilihan Anda berhasil disimpan di Cloud! 🎉');
+          document.getElementById('dbStatus').innerText = "Data tersinkronisasi 🟢";
+        } else {
+           showToast('Gagal menyimpan: ' + result.message);
+        }
+      } catch (error) {
+        showToast('Gagal terhubung ke server.');
+      } finally {
+        document.getElementById('loadingOverlay').style.display = 'none';
+      }
+    }
+
+    function highlightCard(element) {
+      const cards = document.querySelectorAll('.ice-card');
+      cards.forEach(c => c.classList.remove('selected'));
+      element.classList.add('selected');
+    }
+
+    // --- CANVAS GENERATOR ---
+    function toggleAttachmentInfo() {
+      const lampiranSelect = document.getElementById('canvasLampiran').value;
+      const noticeBox = document.getElementById('attachmentNoticeBox');
+      if (lampiranSelect === 'ya') noticeBox.classList.add('visible');
+      else noticeBox.classList.remove('visible');
+    }
+
     function generatePracticePrompt() {
       const jenjang = document.getElementById('canvasJenjang').value;
       const mapel = document.getElementById('canvasMapel').value.trim() || 'Mata Pelajaran Madrasah';
@@ -2306,12 +1616,9 @@ Tugas Anda adalah membuat 1 file HTML5 mandiri (Single File HTML + CSS + JS) unt
       const isLampirkan = document.getElementById('canvasLampiran').value === 'ya';
       const tampilanDesc = document.getElementById('canvasTampilan').value.trim() || 'Desain bernuansa modern, bersih, perpaduan warna hijau islami dan emas elegan, tata letak kartu intuitif, tombol interaktif besar yang nyaman diakses lewat smartphone maupun laptop, serta tipografi jelas dan ramah mata.';
 
-      // Kondisional instruksi lampiran mandiri
       const instruksiLampiran = isLampirkan 
-        ? `[PENTING - REFERENSI MATERI & BANK SOAL TERLAMPIR]:
-Saya MELAMPIRKAN file dokumen materi dan butir soal mandiri bersama instruksi ini. Harap gunakan isi file dokumen yang saya lampirkan tersebut sebagai konten inti materi pelajaran, kisi-kisi fakta, kunci jawaban, dan butir evaluasi kuis di dalam media pembelajaran yang Anda susun.`
-        : `[SUMBER MATERI & BANK SOAL]:
-Buatkan ringkasan materi yang padat, akurat secara keilmuan, serta 5 butir soal evaluasi kuis formatif interaktif beserta pembahasan lengkapnya secara otomatis sesuai kurikulum madrasah.`;
+        ? `[PENTING - REFERENSI MATERI & BANK SOAL TERLAMPIR]:\nSaya MELAMPIRKAN file dokumen materi dan butir soal mandiri bersama instruksi ini. Harap gunakan isi file dokumen yang saya lampirkan tersebut sebagai konten inti materi pelajaran, kisi-kisi fakta, kunci jawaban, dan butir evaluasi kuis di dalam media pembelajaran yang Anda susun.`
+        : `[SUMBER MATERI & BANK SOAL]:\nBuatkan ringkasan materi yang padat, akurat secara keilmuan, serta 5 butir soal evaluasi kuis formatif interaktif beserta pembahasan lengkapnya secara otomatis sesuai kurikulum madrasah.`;
 
       const generated = `Bertindaklah sebagai Senior Instructional Designer dan Pengembang Web Front-End untuk guru madrasah di lingkungan Kantor Wilayah Kementerian Agama Provinsi Gorontalo.
 
@@ -2348,17 +1655,14 @@ Hasilkan seluruh kode utuh dalam SATU blok kode HTML mandiri (termasuk tag <styl
 
     function copyGeneratedPracticePrompt() {
       const promptText = document.getElementById('practicePromptOutput').value;
-      if (!promptText || promptText.includes('Klik tombol')) {
-        generatePracticePrompt();
-      }
+      if (!promptText || promptText.includes('Klik tombol')) generatePracticePrompt();
       copyText(document.getElementById('practicePromptOutput').value);
     }
 
-    // Initial Load
+    // Init
     window.addEventListener('DOMContentLoaded', () => {
       updateSlideView();
       buildTocGrid();
-      // Generate default practice prompt on load
       generatePracticePrompt();
     });
   </script>
